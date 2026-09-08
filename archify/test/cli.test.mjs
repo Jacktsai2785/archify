@@ -1,11 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawn, spawnSync } from 'node:child_process';
+import { execFileSync, spawn, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { disposeBundleFixture, stageBundleFixture } from './helpers/bundle-fixture.mjs';
 import { extractSvgs, parseXml } from './helpers/xml.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -82,6 +83,8 @@ test('cli: help lists commands and diagram types', () => {
   assert.match(result.stdout, /archify guide \[scenario or question\]/);
   assert.match(result.stdout, /archify doctor/);
   assert.match(result.stdout, /archify demo \[output-directory\]/);
+  assert.match(result.stdout, /archify bundle <dir>/);
+  assert.match(result.stdout, /archify locate <base>\.\.<head>/);
   assert.match(result.stdout, /architecture, workflow, sequence, dataflow, lifecycle/);
 });
 
@@ -937,6 +940,21 @@ test('render rejects a mistyped option instead of writing a file named after it'
   assert.deepEqual(fs.readdirSync(dir), ['spec.json']);
 });
 
+test('bundle --check --json exits non-zero on a stale child and names bundle/child-stale', () => {
+  const dir = stageBundleFixture({ prefix: 'archify-cli-bundle-stale-' });
+  try {
+    const specPath = path.join(dir, 'payments.json');
+    const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
+    spec.meta.title = 'Stale child';
+    fs.writeFileSync(specPath, `${JSON.stringify(spec, null, 2)}\n`);
+    const result = run(['bundle', dir, '--check', '--json']);
+    assert.notEqual(result.status, 0);
+    assert.match(result.stdout, /bundle\/child-stale/);
+  } finally {
+    disposeBundleFixture(dir);
+  }
+});
+
 test('render rejects an extra positional argument', () => {
   const dir = fs.mkdtempSync(path.join(tmp, 'render-arity-'));
   const spec = path.join(dir, 'spec.json');
@@ -946,4 +964,305 @@ test('render rejects an extra positional argument', () => {
 
   assert.notEqual(result.status, 0);
   assert.deepEqual(fs.readdirSync(dir), ['spec.json']);
+});
+
+function locateCliRepo() {
+  const root = fs.mkdtempSync(path.join(tmp, 'locate-cli-'));
+  const git = (...args) => execFileSync('git', ['-C', root, ...args], { encoding: 'utf8' }).trim();
+  execFileSync('git', ['-C', root, 'init']);
+  git('config', 'user.name', 'Archify Tests');
+  git('config', 'user.email', 'archify@example.test');
+  git('config', 'commit.gpgsign', 'false');
+  fs.mkdirSync(path.join(root, 'bin'), { recursive: true });
+  fs.mkdirSync(path.join(root, 'src'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'bin/cli.mjs'), 'console.log(1)\n');
+  fs.writeFileSync(path.join(root, 'src/main.mjs'), 'export const n = 1\n');
+  const map = {
+    schema_version: 1,
+    diagram_type: 'architecture',
+    meta: { title: 'Locate CLI' },
+    components: [
+      { id: 'cli', type: 'frontend', label: 'CLI', pos: [40, 80], size: [120, 60] },
+      { id: 'core', type: 'backend', label: 'Core', pos: [240, 80], size: [120, 60] },
+    ],
+    connections: [{ id: 'cli-core', from: 'cli', to: 'core' }],
+  };
+  const ownership = {
+    schema_version: 1,
+    kind: 'ownership',
+    map: 'map.architecture.json',
+    excluded: ['vendor/**'],
+    components: [
+      { id: 'cli', globs: ['bin/**'] },
+      { id: 'core', globs: ['src/**'] },
+    ],
+  };
+  fs.writeFileSync(path.join(root, 'map.architecture.json'), `${JSON.stringify(map, null, 2)}\n`);
+  fs.writeFileSync(path.join(root, 'map.architecture.ownership.json'), `${JSON.stringify(ownership, null, 2)}\n`);
+  git('add', '.');
+  git('commit', '-m', 'base');
+  const base = git('rev-parse', 'HEAD');
+  fs.writeFileSync(path.join(root, 'bin/cli.mjs'), 'console.log(2)\n');
+  git('add', '.');
+  git('commit', '-m', 'head');
+  const head = git('rev-parse', 'HEAD');
+  return { root, base, head };
+}
+
+function locateMapEditedRepo() {
+  const { root, base } = locateCliRepo();
+  const git = (...args) => execFileSync('git', ['-C', root, ...args], { encoding: 'utf8' }).trim();
+  const map = JSON.parse(fs.readFileSync(path.join(root, 'map.architecture.json'), 'utf8'));
+  map.components[0].label = 'CLI edited';
+  fs.writeFileSync(path.join(root, 'map.architecture.json'), `${JSON.stringify(map, null, 2)}\n`);
+  git('add', 'map.architecture.json');
+  git('commit', '-m', 'edit map');
+  return { root, base, head: git('rev-parse', 'HEAD') };
+}
+
+function locateTypedCliRepo(type) {
+  const root = fs.mkdtempSync(path.join(tmp, `locate-cli-${type}-`));
+  const git = (...args) => execFileSync('git', ['-C', root, ...args], { encoding: 'utf8' }).trim();
+  execFileSync('git', ['-C', root, 'init']);
+  git('config', 'user.name', 'Archify Tests');
+  git('config', 'user.email', 'archify@example.test');
+  git('config', 'commit.gpgsign', 'false');
+  fs.mkdirSync(path.join(root, 'bin'), { recursive: true });
+  fs.mkdirSync(path.join(root, 'src'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'bin/cli.mjs'), 'console.log(1)\n');
+  fs.writeFileSync(path.join(root, 'src/main.mjs'), 'export const n = 1\n');
+  const mapFile = `map.${type}.json`;
+  const map = type === 'workflow'
+    ? {
+      schema_version: 2,
+      diagram_type: 'workflow',
+      meta: { title: 'Locate workflow' },
+      lanes: [{ id: 'main', label: 'Main' }],
+      nodes: [
+        { id: 'start', lane: 'main', col: 0, type: 'frontend', label: 'Start' },
+        { id: 'end', lane: 'main', col: 1, type: 'backend', label: 'End' },
+      ],
+      edges: [{ id: 'start-end', from: 'start', to: 'end' }],
+    }
+    : {
+      schema_version: 1,
+      diagram_type: 'lifecycle',
+      meta: { title: 'Locate lifecycle' },
+      lanes: [{ id: 'main', label: 'Main' }],
+      states: [
+        { id: 'begin', type: 'start', label: 'Begin', lane: 'main', col: 0 },
+        { id: 'done', type: 'success', label: 'Done', lane: 'main', col: 1 },
+      ],
+      transitions: [{ from: 'begin', to: 'done' }],
+    };
+  const nodeIds = type === 'workflow' ? map.nodes.map((node) => node.id) : map.states.map((state) => state.id);
+  const ownership = {
+    schema_version: 1,
+    kind: 'ownership',
+    map: mapFile,
+    components: nodeIds.map((id, index) => ({
+      id,
+      globs: [index === 0 ? 'bin/**' : 'src/**'],
+    })),
+  };
+  fs.writeFileSync(path.join(root, mapFile), `${JSON.stringify(map, null, 2)}\n`);
+  fs.writeFileSync(path.join(root, `${mapFile.replace(/\.json$/i, '')}.ownership.json`), `${JSON.stringify(ownership, null, 2)}\n`);
+  git('add', '.');
+  git('commit', '-m', 'base');
+  const base = git('rev-parse', 'HEAD');
+  fs.writeFileSync(path.join(root, 'bin/cli.mjs'), 'console.log(2)\n');
+  git('add', '.');
+  git('commit', '-m', 'head');
+  return { root, base, head: git('rev-parse', 'HEAD'), mapPath: path.join(root, mapFile) };
+}
+
+test('cli: locate range happy path writes receipt and html', () => {
+  const { root, base, head } = locateCliRepo();
+  const out = path.join(root, 'out');
+  const result = run([
+    'locate', `${base}..${head}`,
+    '--map', path.join(root, 'map.architecture.json'),
+    '--repo-root', root,
+    '--out', out,
+    '--json',
+  ]);
+  assert.equal(result.status, 0, result.stderr + result.stdout);
+  const receipt = JSON.parse(result.stdout);
+  assert.equal(receipt.command, 'locate');
+  assert.equal(receipt.ok, true);
+  assert.ok(fs.existsSync(path.join(out, 'locate.receipt.json')));
+  assert.ok(fs.existsSync(path.join(out, 'locate.html')));
+  assert.deepEqual(fs.readdirSync(out).sort(), ['locate.html', 'locate.receipt.json']);
+});
+
+test('cli: locate map edited in range attaches compare artifacts', () => {
+  const { root, base, head } = locateMapEditedRepo();
+  const out = path.join(root, 'out');
+  const result = run([
+    'locate', `${base}..${head}`,
+    '--map', path.join(root, 'map.architecture.json'),
+    '--repo-root', root,
+    '--out', out,
+    '--json',
+  ]);
+  assert.equal(result.status, 0, result.stderr + result.stdout);
+  const receipt = JSON.parse(result.stdout);
+  assert.equal(receipt.command, 'locate');
+  assert.equal(receipt.ok, true);
+  assert.equal(receipt.mapDelta.status, 'compared');
+  assert.ok(receipt.mapDelta.receiptPath);
+  assert.ok(fs.existsSync(path.join(out, receipt.mapDelta.receiptPath)));
+  assert.ok(fs.existsSync(path.join(out, 'compare', 'map-delta.receipt.json')));
+});
+
+test('cli: locate workflow map writes receipt-only html', () => {
+  const { root, base, head, mapPath } = locateTypedCliRepo('workflow');
+  const out = path.join(root, 'out');
+  const result = run([
+    'locate', `${base}..${head}`,
+    '--map', mapPath,
+    '--repo-root', root,
+    '--out', out,
+    '--json',
+  ]);
+  assert.equal(result.status, 0, result.stderr + result.stdout);
+  const receipt = JSON.parse(result.stdout);
+  assert.equal(receipt.command, 'locate');
+  assert.equal(receipt.map.diagramType, 'workflow');
+  const html = fs.readFileSync(path.join(out, 'locate.html'), 'utf8');
+  assert.match(html, /Locate receipt only\./);
+  assert.ok(fs.existsSync(path.join(out, 'locate.receipt.json')));
+});
+
+test('cli: locate lifecycle map writes receipt-only html', () => {
+  const { root, base, head, mapPath } = locateTypedCliRepo('lifecycle');
+  const out = path.join(root, 'out');
+  const result = run([
+    'locate', `${base}..${head}`,
+    '--map', mapPath,
+    '--repo-root', root,
+    '--out', out,
+    '--json',
+  ]);
+  assert.equal(result.status, 0, result.stderr + result.stdout);
+  const receipt = JSON.parse(result.stdout);
+  assert.equal(receipt.command, 'locate');
+  assert.equal(receipt.map.diagramType, 'lifecycle');
+  const html = fs.readFileSync(path.join(out, 'locate.html'), 'utf8');
+  assert.match(html, /Locate receipt only\./);
+  assert.ok(fs.existsSync(path.join(out, 'locate.receipt.json')));
+});
+
+test('cli: locate treats an absent pinned map revision as advisory', async () => {
+  const { measureMapBehind } = await import('../locate/cli.mjs');
+  const { root, base, head } = locateCliRepo();
+  const fake = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+  assert.deepEqual(measureMapBehind(root, fake, head), { mapRevisionUnavailable: true });
+  const receipt = (await import('../locate/locate.mjs')).locateRange({
+    base,
+    head,
+    map: {
+      schema_version: 1,
+      diagram_type: 'architecture',
+      meta: { title: 'Locate CLI', repository: { url: 'https://github.com/example/repo', revision: fake } },
+      components: [
+        { id: 'cli', type: 'frontend', label: 'CLI' },
+        { id: 'core', type: 'backend', label: 'Core' },
+      ],
+    },
+    ownership: {
+      components: [
+        { id: 'cli', globs: ['bin/**'] },
+        { id: 'core', globs: ['src/**'] },
+      ],
+    },
+    changes: [{ changeType: 'M', path: 'bin/cli.mjs' }],
+    headTree: ['bin/cli.mjs', 'src/main.mjs'],
+    mapRevisionUnavailable: true,
+    mapPath: 'map.architecture.json',
+    ownershipPath: 'map.architecture.ownership.json',
+    ownershipSha256: 'a'.repeat(64),
+  });
+  assert.equal(receipt.map.revision, fake);
+  assert.equal(receipt.map.mapBehindBy, undefined);
+  assert.ok(receipt.review.advisory.includes('map_revision_unavailable'));
+  assert.ok(!receipt.review.advisory.includes('map_behind'));
+});
+
+test('cli: locate --lint ambiguous exits 1', () => {
+  const { root } = locateCliRepo();
+  const out = path.join(root, 'out');
+  const ownership = JSON.parse(fs.readFileSync(path.join(root, 'map.architecture.ownership.json'), 'utf8'));
+  ownership.components = [
+    { id: 'cli', globs: ['src/**'] },
+    { id: 'core', globs: ['src/**'] },
+  ];
+  fs.writeFileSync(path.join(root, 'map.architecture.ownership.json'), `${JSON.stringify(ownership, null, 2)}\n`);
+  const result = run([
+    'locate', '--lint', 'HEAD',
+    '--map', path.join(root, 'map.architecture.json'),
+    '--repo-root', root,
+    '--out', out,
+    '--json',
+  ]);
+  assert.equal(result.status, 1, result.stderr + result.stdout);
+  const payload = JSON.parse(result.stdout);
+  assert.equal(payload.ok, false);
+  assert.equal(payload.diagnostics[0].code, 'locate/ambiguous-ownership');
+  assert.ok(payload.diagnostics.some((item) => item.subject.path === 'src/main.mjs'));
+});
+
+test('cli: locate invalid range exits 2', () => {
+  const result = run(['locate', 'not-a-range', '--map', 'map.architecture.json']);
+  assert.equal(result.status, 2, result.stderr + result.stdout);
+  assert.match(result.stderr, /locate\/range-invalid/);
+});
+
+test('cli: locate unknown revision is range-invalid exit 2', () => {
+  const { root } = locateCliRepo();
+  const out = path.join(root, 'out');
+  const result = run([
+    'locate', 'this-rev-does-not-exist..HEAD',
+    '--map', path.join(root, 'map.architecture.json'),
+    '--repo-root', root,
+    '--out', out,
+    '--json',
+  ]);
+  assert.equal(result.status, 2, result.stderr + result.stdout);
+  const payload = JSON.parse(result.stdout);
+  assert.equal(payload.diagnostics[0].code, 'locate/range-invalid');
+  assert.equal(typeof payload.diagnostics[0].evidence.stderr, 'string');
+  assert.ok(payload.diagnostics[0].evidence.stderr.length > 0);
+});
+
+test('cli: locate without --out exits 2', () => {
+  const { root, base, head } = locateCliRepo();
+  const result = run([
+    'locate', `${base}..${head}`,
+    '--map', path.join(root, 'map.architecture.json'),
+    '--repo-root', root,
+  ]);
+  assert.equal(result.status, 2, result.stderr + result.stdout);
+  assert.match(result.stderr, /--out/);
+});
+
+test('cli: locate failing run does not leak staging', () => {
+  const { root, base, head } = locateCliRepo();
+  const cwd = fs.mkdtempSync(path.join(tmp, 'locate-cwd-'));
+  const out = path.join(root, 'out');
+  const result = run([
+    'locate', `${base}..${head}`,
+    '--map', path.join(root, 'map.architecture.json'),
+    '--repo-root', root,
+    '--out', out,
+    '--facts', path.join(root, 'missing-before.json'), path.join(root, 'missing-after.json'),
+    '--json',
+  ], { cwd });
+  assert.equal(result.status, 1, result.stderr + result.stdout);
+  const cwdEntries = fs.readdirSync(cwd);
+  assert.equal(cwdEntries.some((name) => name.startsWith('.archify-locate-')), false);
+  assert.equal(cwdEntries.includes('locate.html'), false);
+  assert.equal(cwdEntries.includes('locate.receipt.json'), false);
+  const outEntries = fs.existsSync(out) ? fs.readdirSync(out) : [];
+  assert.equal(outEntries.some((name) => name.startsWith('.archify-locate-')), false);
 });
