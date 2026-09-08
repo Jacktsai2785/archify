@@ -6,7 +6,7 @@ import path from 'node:path';
 import { spawnCliSync } from './resolve-cli.mjs';
 
 import { stageCleanSkill } from '../../../scripts/stage-clean-skill.mjs';
-import { integrationRoot, repoRoot, manifest, release, releaseSnapshot } from './release-source.mjs';
+import { adapterCommit, manifest, release, releaseSnapshot, stageAdapter } from './release-source.mjs';
 
 function argValue(flag) {
   const index = process.argv.indexOf(flag);
@@ -19,14 +19,9 @@ const stage = fs.mkdtempSync(path.join(os.tmpdir(), 'archify-dsh-pack-'));
 const snapshot = fs.mkdtempSync(path.join(os.tmpdir(), 'archify-dsh-source-'));
 
 try {
+  stageAdapter(stage);
   releaseSnapshot(snapshot);
-  const releaseIntegration = integrationRoot;
   stageCleanSkill({ repoRoot: snapshot, destination: path.join(stage, 'skills', 'archify') });
-  fs.copyFileSync(path.join(integrationRoot, 'release.json'), path.join(stage, 'release.json'));
-  fs.copyFileSync(path.join(releaseIntegration, 'package.json'), path.join(stage, 'package.json'));
-  fs.copyFileSync(path.join(releaseIntegration, 'cordis.patch.yml'), path.join(stage, 'cordis.patch.yml'));
-  fs.cpSync(path.join(releaseIntegration, 'lib'), path.join(stage, 'lib'), { recursive: true });
-  fs.copyFileSync(path.join(releaseIntegration, 'README.md'), path.join(stage, 'README.md'));
   fs.copyFileSync(path.join(snapshot, 'LICENSE'), path.join(stage, 'LICENSE'));
 
   const packed = spawnCliSync('npm', ['pack', '--json', '--pack-destination', stage], {
@@ -63,12 +58,17 @@ try {
     throw new Error(`npm pack metadata did not include a file list\n${packed.stdout}`);
   }
   const files = packMeta.files.map((file) => ({ path: file.path }));
+  const packagedPaths = new Set(files.map(({ path: filePath }) => filePath.replace(/^package\//, '')));
+  for (const required of ['package.json', 'release.json', 'cordis.patch.yml', 'README.md', 'LICENSE', 'lib/index.js', 'skills/archify/SKILL.md']) {
+    if (!packagedPaths.has(required)) throw new Error(`DSH tarball is missing required file: ${required}`);
+  }
   const destination = path.resolve(out || path.join(process.cwd(), produced));
   fs.mkdirSync(path.dirname(destination), { recursive: true });
   fs.copyFileSync(path.join(stage, produced), destination);
   const result = {
     name: packMeta.name || '@tt-a1i/archify-dsh',
     version: packMeta.version || manifest.version,
+    adapterCommit,
     sourceCommit: release.sourceCommit,
     skillVersion: release.skillVersion,
     filename: path.basename(destination),

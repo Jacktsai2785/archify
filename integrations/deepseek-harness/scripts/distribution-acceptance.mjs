@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnCli, spawnCliSync } from './resolve-cli.mjs';
 import { runWithTransientNetworkRetry } from './transient-retry.mjs';
-import { manifest, release, releaseSnapshot } from './release-source.mjs';
+import { adapterCommit, manifest, release, releaseSnapshot } from './release-source.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const integrationRoot = path.resolve(here, '..');
@@ -21,7 +21,7 @@ const PLUGIN_MUTATION_TIMEOUT = 180_000;
 
 const receipt = {
   ok: false,
-  adapter: { name: PACKAGE_NAME, version: PACKAGE_VERSION },
+  adapter: { name: PACKAGE_NAME, version: PACKAGE_VERSION, commit: adapterCommit },
   dsh: { spec: DSH_SPEC },
   node: process.version,
   platform: process.platform,
@@ -163,7 +163,9 @@ try {
 } catch (error) {
   fail('pack', `pack did not emit JSON: ${error.message}\n${pack.stdout}`);
 }
-if (packReceipt.name !== PACKAGE_NAME || packReceipt.version !== PACKAGE_VERSION || !fs.existsSync(tarball)) {
+if (packReceipt.name !== PACKAGE_NAME || packReceipt.version !== PACKAGE_VERSION
+  || packReceipt.adapterCommit !== adapterCommit || packReceipt.sourceCommit !== release.sourceCommit
+  || !fs.existsSync(tarball)) {
   fail('pack', 'pack receipt identity mismatch', { packReceipt, tarball });
 }
 pass('pack', { filename: packReceipt.filename, fileCount: packReceipt.files?.length });
