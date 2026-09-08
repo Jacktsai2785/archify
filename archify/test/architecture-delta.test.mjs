@@ -36,6 +36,7 @@ test('architecture compare classifies authored facts separately from geometry an
     evidenceChanged: 0,
     removed: 1,
     moved: 1,
+    navigationChanged: 0,
   });
   assert.deepEqual(receipt.summary.connections, {
     added: 1,
@@ -86,6 +87,7 @@ test('legend-only changes are presentation changes and never topology changes', 
     evidenceChanged: 0,
     removed: 0,
     moved: 0,
+    navigationChanged: 0,
   });
   assert.deepEqual(receipt.summary.connections, {
     added: 0,
@@ -157,7 +159,26 @@ test('evidence-only component changes keep an enabled exact review contract', ()
   assert.equal(receipt.changes.components[0].status, 'evidence-changed');
   assert.deepEqual(receipt.changes.components[0].classifications, ['evidence']);
   const runtime = fs.readFileSync(path.join(skillRoot, 'delta/architecture-delta.mjs'), 'utf8');
-  assert.match(runtime, /statuses: \['added', 'changed', 'evidence-changed', 'removed', 'moved'\]/);
+  assert.match(runtime, /statuses: \['added', 'changed', 'evidence-changed', 'removed', 'moved', 'navigation-changed'\]/);
+});
+
+test('drilldown-only component changes are navigation-changed and do not inflate changed or moved', () => {
+  const base = read(baseFixture);
+  const head = read(baseFixture);
+  head.components.find((component) => component.id === 'checkout').drilldown = 'payments';
+  const receipt = compareArchitecture(base, head);
+  assert.deepEqual(receipt.summary.components, {
+    added: 0,
+    changed: 0,
+    evidenceChanged: 0,
+    removed: 0,
+    moved: 0,
+    navigationChanged: 1,
+  });
+  const change = receipt.changes.components.find((item) => item.id === 'checkout');
+  assert.equal(change.status, 'navigation-changed');
+  assert.deepEqual(change.classifications, ['navigation']);
+  assert.deepEqual(change.changedFields, ['/drilldown']);
 });
 
 test('mixed semantic and geometry component changes retain both exact forms', () => {
