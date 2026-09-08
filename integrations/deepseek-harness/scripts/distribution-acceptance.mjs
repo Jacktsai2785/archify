@@ -6,14 +6,15 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnCli, spawnCliSync } from './resolve-cli.mjs';
 import { runWithTransientNetworkRetry } from './transient-retry.mjs';
+import { manifest, release, releaseSnapshot } from './release-source.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const integrationRoot = path.resolve(here, '..');
 const repoRoot = path.resolve(integrationRoot, '..', '..');
-const PACKAGE_NAME = '@tt-a1i/archify-dsh';
-const PACKAGE_VERSION = '0.1.0';
-const DSH_RELEASE_REF = 'archify-dsh-v0.1.0';
-const DSH_SPEC = '@deepseek-ai/dsh@0.1.0-rc.6';
+const PACKAGE_NAME = manifest.name;
+const PACKAGE_VERSION = manifest.version;
+const DSH_RELEASE_REF = release.sourceCommit;
+const DSH_SPEC = `@deepseek-ai/dsh@${release.dshVersion}`;
 const PROFILE = 'archify-dsh-acceptance';
 const DSH_RUNTIME_INSTALL_TIMEOUT = process.platform === 'win32' ? 600_000 : 300_000;
 const PLUGIN_MUTATION_TIMEOUT = 180_000;
@@ -132,7 +133,7 @@ function waitForProbe(child, file, timeoutMs) {
 }
 
 const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'archify-dsh-acceptance-'));
-const tarball = path.join(scratch, 'tt-a1i-archify-dsh-0.1.0.tgz');
+const tarball = path.join(scratch, `tt-a1i-archify-dsh-${PACKAGE_VERSION}.tgz`);
 const dshHome = path.join(scratch, 'dsh-home');
 const agentsHome = path.join(scratch, 'agents-home');
 const dshRuntime = path.join(scratch, 'dsh-runtime');
@@ -367,14 +368,10 @@ pass('resource-base', { resourcePath: resourceReal });
 const skillRoot = fs.existsSync(path.join(resourceReal, 'SKILL.md'))
   ? resourceReal
   : path.join(resourceReal, 'archify');
-const taggedSmoke = run('git', ['show', `${DSH_RELEASE_REF}:scripts/package-smoke.mjs`], {
-  cwd: repoRoot,
-});
-requireStatus('package-smoke', taggedSmoke, { command: `git show ${DSH_RELEASE_REF}:scripts/package-smoke.mjs` });
-const taggedSmokePath = path.join(scratch, 'package-smoke-v0.1.0.mjs');
-fs.writeFileSync(taggedSmokePath, taggedSmoke.stdout);
-const smoke = run(process.execPath, [taggedSmokePath, skillRoot], {
-  cwd: repoRoot,
+const sourceSnapshot = path.join(scratch, 'release-source');
+releaseSnapshot(sourceSnapshot);
+const smoke = run(process.execPath, [path.join(sourceSnapshot, 'scripts', 'package-smoke.mjs'), skillRoot], {
+  cwd: sourceSnapshot,
   timeout: 120_000,
 });
 requireStatus('package-smoke', smoke, { command: `${DSH_RELEASE_REF} package-smoke.mjs <installed-skill-root>` });

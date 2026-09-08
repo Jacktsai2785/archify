@@ -5,11 +5,15 @@ on:
     paths:
       - 'integrations/deepseek-harness/**'
       - '.github/workflows/dsh.yml'
+      - 'scripts/stage-clean-skill.mjs'
+      - 'scripts/third-party-notices-contract.mjs'
   push:
     branches: [main]
     paths:
       - 'integrations/deepseek-harness/**'
       - '.github/workflows/dsh.yml'
+      - 'scripts/stage-clean-skill.mjs'
+      - 'scripts/third-party-notices-contract.mjs'
     tags:
       - 'archify-dsh-v*'
   schedule:

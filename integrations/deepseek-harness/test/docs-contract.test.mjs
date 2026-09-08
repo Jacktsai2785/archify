@@ -15,11 +15,15 @@ test('README.md and README_EN.md stay byte-identical after the DSH docs', () => 
   assert.equal(read('README.md'), read('README_EN.md'));
 });
 
-test('DSH 0.1.0 documentation keeps its released Skill snapshot immutable', () => {
+test('DSH documentation identifies its pinned development snapshot and independent upgrade path', () => {
   const integration = read('integrations/deepseek-harness/README.md');
-  assert.match(integration, /Archify 2\.14 snapshot/);
-  assert.match(integration, /archify-dsh-v0\.1\.0/);
-  assert.match(integration, /update notifier[\s\S]*intentionally excluded/);
+  const release = JSON.parse(read('integrations/deepseek-harness/release.json'));
+  assert.ok(integration.includes(`Archify ${release.skillVersion}`));
+  assert.ok(integration.includes(release.sourceCommit));
+  assert.match(integration, /not an Archify 2\.17 stable release/);
+  assert.match(integration, /notification-only/);
+  assert.match(integration, /does not update an already installed plugin/);
+  assert.match(integration, /repository root is not a DSH package/);
 });
 
 test('English and Chinese docs cover install, invoke, uninstall, community wording, and Produced Files', () => {
@@ -27,10 +31,10 @@ test('English and Chinese docs cover install, invoke, uninstall, community wordi
   const chinese = [read('README_ZH.md'), read('integrations/deepseek-harness/README.md')].join('\n');
 
   for (const source of [english, chinese, read('README.md'), read('README_ZH.md')]) {
-    assert.match(source, /@tt-a1i\/archify-dsh@0\.1\.0/);
-    assert.match(source, /@deepseek-ai\/dsh@0\.1\.0-rc\.6/);
+    assert.match(source, /@tt-a1i\/archify-dsh@0\.2\.0/);
+    assert.match(source, /@deepseek-ai\/dsh@0\.1\.2-rc\.1/);
     assert.match(source.replaceAll('\\|', '|'), /\^22\.19\.0 \|\| >=24\.0\.0/);
-    assert.match(source, /dsh plugin --profile web add @tt-a1i\/archify-dsh@0\.1\.0/);
+    assert.match(source, /dsh plugin --profile web add @tt-a1i\/archify-dsh@0\.2\.0/);
     assert.match(source, /dsh plugin --profile web remove @tt-a1i\/archify-dsh/);
     assert.match(source, /Use the archify skill to map this repository's runtime architecture/);
     assert.doesNotMatch(source, /dsh plugin[^\n]*github:tt-a1i\/archify/);
