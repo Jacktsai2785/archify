@@ -101,6 +101,21 @@ On revision, summarize what changed since the reviewed head and which findings i
 
 Showcase submissions should include the prompt, agent/client, model, Archify version, redacted JSON, artifact, receipts, and truthful visual-review status. Maintainers may request a smaller safe reproduction. Preserve attribution; showcase acceptance is not a controlled model-quality benchmark.
 
+## Automated review pilot
+
+Once the CodeRabbit GitHub App is enabled for this repository, the root
+[configuration](.coderabbit.yaml) requests automatic reviews of ready PRs and
+subsequent pushes. It uses this guide and the PR template for advisory scope and
+validation-evidence checks. Drafts are excluded. Missing evidence is a request
+for clarification, not proof of a code defect; explain a false positive in the PR.
+
+CodeRabbit does not replace required CI, browser/perceptual acceptance, or a
+maintainer's merge decision. To request a review after fixing an unavailable or
+skipped run, comment `@coderabbitai review`. Maintainers should assess the first
+5–10 reviewed PRs for useful findings, false positives, review time, and repeated
+evidence requests before expanding the pilot. Pause automatic reviews by setting
+`reviews.auto_review.enabled: false`; this does not change CI or branch protection.
+
 ## License
 
 By contributing, you agree to the repository's [MIT License](LICENSE). Submit only work you created or have the right to contribute.
