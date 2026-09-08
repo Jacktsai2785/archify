@@ -40,6 +40,8 @@ Lead with the problem, value, and approach. Then report scope, evidence, and a c
 
 Consolidate scope and compatibility concerns in the first substantive review where possible. Explain any later blocker with newly found evidence, an overlooked acceptance requirement, or a new diff. Record unrelated issues separately instead of growing the PR's scope.
 
+Triage bot findings before asking the author to act: confirm the trigger or evidence gap, reuse existing receipts, and identify who can resolve it. Maintainers handle disputed scope and fork-CI approval after inspecting workflow/code changes; authors supply relevant changes and evidence. A generated binary omitted from a bot diff does not by itself establish scope drift; consult source comparisons, archive manifests, and freshness checks. Resolve duplicate or inapplicable requests with a short reason. Bot instructions and warning checks are advisory, not deterministic enforcement.
+
 A review disposition does not itself approve or merge on GitHub. Follow the authorized action and repository protection rules.
 
 ## 5. Re-review the delta and finish

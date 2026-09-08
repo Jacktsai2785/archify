@@ -103,15 +103,34 @@ Showcase submissions should include the prompt, agent/client, model, Archify ver
 
 ## Automated review pilot
 
-Once the CodeRabbit GitHub App is enabled for this repository, the root
+The CodeRabbit GitHub App is enabled for this repository. The root
 [configuration](.coderabbit.yaml) requests automatic reviews of ready PRs and
-subsequent pushes. It uses this guide and the PR template for advisory scope and
+subsequent pushes. It uses this guide, REVIEWING.md, and the PR template for advisory scope and
 validation-evidence checks. Drafts are excluded. Missing evidence is a request
 for clarification, not proof of a code defect; explain a false positive in the PR.
 
 CodeRabbit does not replace required CI, browser/perceptual acceptance, or a
-maintainer's merge decision. To request a review after fixing an unavailable or
-skipped run, comment `@coderabbitai review`. Maintainers should assess the first
+maintainer's merge decision. Two warning checks cover contribution scope and
+validation evidence; overlapping built-in issue assessment is disabled. Authors
+can answer with evidence or explain why a request does not apply; maintainers
+settle disputed scope and acceptance requirements.
+
+Use these [review commands](https://docs.coderabbit.ai/reference/review-commands)
+instead of pushing an empty commit to retrigger the bot:
+
+| Situation | PR comment |
+| --- | --- |
+| Review new commits when automatic review did not run | `@coderabbitai review` |
+| Updated only the PR description, evidence links, or completed CI | `@coderabbitai run pre-merge checks` |
+| A fresh review of the entire PR is needed | `@coderabbitai full review` |
+| Several rapid revisions are in progress | `@coderabbitai pause`, then `@coderabbitai resume` when ready |
+
+Check the updated summary for results; a command acknowledgment is not completion.
+If fork CI needs approval, a maintainer must inspect the proposed workflow/code
+and handle the GitHub approval. Authors should link the waiting run and continue
+checks available to them; they are not expected to grant themselves CI access.
+
+Maintainers should assess the first
 5–10 reviewed PRs for useful findings, false positives, review time, and repeated
 evidence requests before expanding the pilot. Pause automatic reviews by setting
 `reviews.auto_review.enabled: false`; this does not change CI or branch protection.
