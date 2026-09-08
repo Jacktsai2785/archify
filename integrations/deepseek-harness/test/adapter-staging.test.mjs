@@ -188,6 +188,9 @@ test('pack rejects a missing required adapter main and leaves no target tarball'
 test('pack rejects a committed reserved device-name path and leaves no target tarball', () => {
   const { root, checkout } = fixture();
   try {
+    // This models a tree created on Linux; keep NTFS protection disabled only
+    // in the disposable clone so Git can represent the hostile path on Windows.
+    git(checkout, ['config', 'core.protectNTFS', 'false']);
     const invalidRelative = 'integrations/deepseek-harness/lib/NUL.js';
     const blob = git(checkout, ['hash-object', '-w', '--stdin'], { input: 'reserved-name fixture\n' });
     git(checkout, ['update-index', '--add', '--cacheinfo', `100644,${blob},${invalidRelative}`]);

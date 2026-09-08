@@ -59,7 +59,7 @@ test('English and Chinese docs cover install, invoke, uninstall, community wordi
   for (const source of [english, chinese, englishRoot, chineseRoot]) {
     assert.ok(source.includes(publishedInstall));
     assert.ok(!source.includes(candidateInstall));
-    assert.ok(source.includes(`@deepseek-ai/dsh@${candidate.dshVersion}`));
+    assert.ok(source.includes(`@deepseek-ai/dsh@${published.dshVersion}`));
     assert.ok(source.replaceAll('\\|', '|').includes(manifest.engines.node));
     assert.match(source, /dsh plugin --profile web remove @tt-a1i\/archify-dsh/);
     assert.match(source, /Use the archify skill to map this repository's runtime architecture/);
