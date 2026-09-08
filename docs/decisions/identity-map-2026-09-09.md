@@ -191,10 +191,15 @@ the top-level diagnostic code (`archify/bin/archify.mjs:2058-2065`).
   meaning. Descending happens through the Semantic Passport's `Descend` button
   (`archify/assets/template.html:15165-15170`, `archify/renderers/shared/i18n.mjs:307`) or by
   activating the drilldown mark itself (`:15379-15387`).
-- **The parent never leaves the DOM.** `descend()` hides the parent SVG without touching any
-  transform (`:15289`) and mounts the child in a same-directory iframe (`:15300-15302`). `back()`
-  reveals the same element again (`:15333`), so the parent's coordinates are unchanged by
-  construction.
+- **The parent never leaves the DOM or the layout.** `descend()` sets `data-drilldown-level`
+  and the child is overlaid in a same-directory iframe; the entry SVG is kept in flow with
+  `visibility: hidden`, never `display: none` (`archify/assets/template.html:4400-4411`), and
+  the adaptive reader and viewer-chrome measurers are frozen while descended (`:11115`,
+  `:11157`, `:11174`, `:11200`, `:11401`, `:11507`). This is deliberate: the first
+  implementation used `display: none`, and CI's headless Chrome showed the reader shrinking
+  `--archify-reader-width` from 1376px to 960px on reveal because the collapsed SVG no longer
+  reserved its box — every node scaled by 0.691. Geometry is unchanged only if no fit runs, so
+  no fit is allowed to run.
 - **Scroll is restored.** `descend()` captures window and canvas scroll offsets (`:15275`,
   `:15121-15129`); `back()` restores them after revealing the parent (`:15336`), which is what
   makes "the same pixels" true when the reader scrolled inside level 1.

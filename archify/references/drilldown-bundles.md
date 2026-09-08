@@ -194,8 +194,9 @@ a 96 px silhouette of the parent — structure only, no text, sigils, beacons or
 the descended component in Verified Cyan. The child fills the canvas as a complete viewer with its
 own Passport, focus, lens, route probe, finder, theme, preset, and export.
 
-**Returning.** The parent SVG never leaves the DOM and its transform is never touched; `back()`
-simply reveals it again, so the geometry is unchanged by construction. Window and canvas scroll
+**Returning.** The parent SVG never leaves the DOM or the layout: it stays in flow with
+`visibility: hidden` while the child is overlaid, and the adaptive reader's re-measure is frozen
+while descended, so no fit runs and `back()` simply reveals the same geometry. Window and canvas scroll
 offsets are captured on descend and restored on ascend. `Esc` ascends, `Backspace` is a synonym,
 and the breadcrumb's first rung does the same. The drilldown rung sits at the outer end of the
 existing Escape ladder, so transient states inside the child are cleared first. A child that has
