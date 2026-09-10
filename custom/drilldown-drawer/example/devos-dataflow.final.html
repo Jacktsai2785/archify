@@ -15496,6 +15496,14 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   svg text[font-size="8"]:not([data-detail]) { font-size: 11px !important; }
   svg text[font-size="10"]:not([data-detail]) { font-size: 13px !important; }
 
+  /* archify's stock .container caps at 1440px (a "reading width" meant for
+     prose-shaped diagrams) regardless of how wide/tall the actual content
+     is. A dense diagram (many lanes, one node per real function call) is
+     not prose — capping it at 1440px on a wide monitor just adds two huge
+     empty gutters and shrinks every node's text for no reason. Only widen
+     it, never narrow below the stock default. */
+  .container { max-width: max(1440px, min(94vw, 2200px)) !important; }
+
   #child-drawer {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 2147483000;
     background: var(--bg); border-top: 2px solid var(--panel-border);
