@@ -1,0 +1,10 @@
+[
+  { "gate": "Router risk_tier 分類", "claimed": "全流程的守門", "status": "ok", "statusLabel": "已修復，真的接線", "detail": "devos work create 建管線前呼叫 route_work_item；risk_tier 不再恆為 None" },
+  { "gate": "devos authorize（Builder 前置）", "claimed": "唯一推進路徑", "status": "ok", "statusLabel": "真的擋，已修復", "detail": "無 --force；max_risk_tier 已改讀 WorkItem 實際 risk_assessment" },
+  { "gate": "Sandbox mutation（git worktree）", "claimed": "Builder 強制沙盒化", "status": "ok", "statusLabel": "真的擋", "detail": "run_isolated_mutation 唯一呼叫路徑；DirtyBaselineError/ScopeEscapeError fail-closed" },
+  { "gate": "Skill Registry 權限比對", "claimed": "派工前檢查 read/write/network/subprocess", "status": "partial", "statusLabel": "部分成立，已修復", "detail": "devos skill dispatch／run-* 真的檢查並拒絕；既有 6 個 stage 仍繞過（spec 刻意分離兩層）" },
+  { "gate": "CodeHealth acceptance 守門", "claimed": "不會動 acceptance 行為", "status": "ok", "statusLabel": "已修復", "detail": "ratchet baseline 一次性凍結；mutation-testing try/finally 保證還原" },
+  { "gate": "Council 雙盲多方審議", "claimed": "可執行的多模型會議", "status": "ok", "statusLabel": "已修復，真雙後端", "detail": "devos council run 接線；--backends codex,claude 預設雙後端輪派，雙判官跨模型" },
+  { "gate": "Eval Harness 執行引擎", "claimed": "自動跑 eval case 驗證品質", "status": "partial", "statusLabel": "部分成立，已修復", "detail": "devos eval run 對 routing 類別真的執行；六階段主流程仍無引擎（刻意不做）" },
+  { "gate": "Dashboard 唯讀六視圖", "claimed": "六個檢視只讀不寫", "status": "ok", "statusLabel": "確認屬實", "detail": "grep 全檔 0 處 INSERT/UPDATE/DELETE，所有 service 呼叫皆為 get/list_by_*" }
+]

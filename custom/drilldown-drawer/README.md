@@ -73,9 +73,25 @@ node ../../bin/archify.mjs deliver workflow my-diagram.json my-diagram.html --qu
 # 2. Write a children.json describing what's inside the nodes you want
 #    to be clickable (see example/devos-dataflow.children.json)
 
-# 3. Inject
-node inject-drilldown.mjs my-diagram.html my-children.json my-diagram.final.html
+# 3. Inject the drilldown drawer
+node inject-drilldown.mjs my-diagram.html my-children.json my-diagram.drilldown.html
+
+# 4. Optional: if you also have "claimed vs actual" content that's naturally a
+#    table (one row per item, same columns every time -- see below), inject it
+#    on top instead of forcing it into archify's native `cards` bullet list
+node inject-gate-table.mjs my-diagram.drilldown.html my-rows.json my-diagram.final.html
 ```
+
+### `inject-gate-table.mjs` — when a real table beats `cards`
+
+archify's `meta.cards` field is a dot + title + flat bullet list. That's fine for a
+loose summary, but content shaped like "for each X, here's what was claimed vs what's
+actually true vs how it's bypassed" is a table by nature — cramming it into one bullet
+per row loses the column alignment and gets hard to scan. This script replaces
+archify's rendered `.cards` block with a real `<table>` (same theme tokens, light/dark
+aware), built from a flat JSON array — see `example/devos-dataflow.gate-rows.json` for
+the shape and `example/devos-dataflow.final.html` for the rendered result. Falls back
+to appending before `</body>` if the source spec had no `cards` block to replace.
 
 `inject-drilldown.mjs` refuses to run twice on the same file (it checks for
 its own marker) and refuses to run on something that isn't a full archify

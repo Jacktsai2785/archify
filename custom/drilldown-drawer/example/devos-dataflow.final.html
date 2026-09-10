@@ -5592,44 +5592,91 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     </div>
 
     <!-- Info Cards -->
-    <div class="cards">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-dot emerald"></div>
-          <h3>🟢 已修復，真的接線（6 項）</h3>
-        </div>
-        <ul>
-          <li>&bull; Router risk_tier 分類：devos work create 建管線前呼叫 route_work_item；risk_tier 不再恆為 None</li>
-          <li>&bull; devos authorize：無 --force；max_risk_tier 已改讀 WorkItem 實際 risk_assessment</li>
-          <li>&bull; Sandbox mutation：run_isolated_mutation 唯一呼叫路徑；DirtyBaselineError/ScopeEscapeError fail-closed</li>
-          <li>&bull; CodeHealth acceptance 守門：ratchet baseline 一次性凍結；mutation-testing try/finally 保證還原</li>
-          <li>&bull; Council 雙盲多方審議：devos council run 接線；--backends codex,claude 預設雙後端輪派，雙判官跨模型</li>
-          <li>&bull; Dashboard 唯讀六視圖：grep 全檔 0 處 INSERT/UPDATE/DELETE，所有 service 呼叫皆為 get/list_by_*</li>
-        </ul>
-      </div>
+    
+<style id="gate-table-style">
+  #gate-table-section { max-width: var(--archify-reader-width, 1440px); margin: 28px auto 0; padding: 0 1.5rem; }
+  #gate-table-section h2 {
+    font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  #gate-table-section .gt-sub { font-size: 12.5px; color: var(--text-muted); margin: 0 0 14px; }
+  #gate-table-wrap { overflow-x: auto; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--bg); }
+  #gate-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  #gate-table th {
+    text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--text-muted); padding: 10px 14px; border-bottom: 1px solid var(--panel-border);
+    background: var(--panel);
+  }
+  #gate-table td { padding: 12px 14px; border-bottom: 1px solid var(--panel-border); vertical-align: top; color: var(--text); }
+  #gate-table tr:last-child td { border-bottom: none; }
+  #gate-table .gt-gate { font-weight: 600; white-space: nowrap; }
+  #gate-table .gt-claimed, #gate-table .gt-detail { color: var(--text-dim); line-height: 1.6; }
+  #gate-table .gt-status { white-space: nowrap; font-weight: 600; }
+  #gate-table .gt-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; }
+  @media (max-width: 720px) { #gate-table-section { padding: 0 1rem; } #gate-table { font-size: 12px; } }
+</style>
+<div id="gate-table-section">
+  <h2>關卡實況 —— 圖上畫成「關卡」的東西，逐一實測</h2>
+  <p class="gt-sub">依「治理欄位有沒有牙齒」判準：🟢 有讀取端會擋・🟡 只約束同類資料／部分成立・🔴 只有寫入與顯示</p>
+  <div id="gate-table-wrap">
+    <table id="gate-table">
+      <thead>
+        <tr><th>關卡</th><th>圖上看起來</th><th>實際</th><th>怎麼被跨過去 / 侷限</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="gt-gate">Router risk_tier 分類</td>
+        <td class="gt-claimed">全流程的守門</td>
+        <td class="gt-status"><span class="gt-dot" style="background:#22c55e"></span>已修復，真的接線</td>
+        <td class="gt-detail">devos work create 建管線前呼叫 route_work_item；risk_tier 不再恆為 None</td>
+      </tr>
+      <tr>
+        <td class="gt-gate">devos authorize（Builder 前置）</td>
+        <td class="gt-claimed">唯一推進路徑</td>
+        <td class="gt-status"><span class="gt-dot" style="background:#22c55e"></span>真的擋，已修復</td>
+        <td class="gt-detail">無 --force；max_risk_tier 已改讀 WorkItem 實際 risk_assessment</td>
+      </tr>
+      <tr>
+        <td class="gt-gate">Sandbox mutation（git worktree）</td>
+        <td class="gt-claimed">Builder 強制沙盒化</td>
+        <td class="gt-status"><span class="gt-dot" style="background:#22c55e"></span>真的擋</td>
+        <td class="gt-detail">run_isolated_mutation 唯一呼叫路徑；DirtyBaselineError/ScopeEscapeError fail-closed</td>
+      </tr>
+      <tr>
+        <td class="gt-gate">Skill Registry 權限比對</td>
+        <td class="gt-claimed">派工前檢查 read/write/network/subprocess</td>
+        <td class="gt-status"><span class="gt-dot" style="background:#e0a63c"></span>部分成立，已修復</td>
+        <td class="gt-detail">devos skill dispatch／run-* 真的檢查並拒絕；既有 6 個 stage 仍繞過（spec 刻意分離兩層）</td>
+      </tr>
+      <tr>
+        <td class="gt-gate">CodeHealth acceptance 守門</td>
+        <td class="gt-claimed">不會動 acceptance 行為</td>
+        <td class="gt-status"><span class="gt-dot" style="background:#22c55e"></span>已修復</td>
+        <td class="gt-detail">ratchet baseline 一次性凍結；mutation-testing try/finally 保證還原</td>
+      </tr>
+      <tr>
+        <td class="gt-gate">Council 雙盲多方審議</td>
+        <td class="gt-claimed">可執行的多模型會議</td>
+        <td class="gt-status"><span class="gt-dot" style="background:#22c55e"></span>已修復，真雙後端</td>
+        <td class="gt-detail">devos council run 接線；--backends codex,claude 預設雙後端輪派，雙判官跨模型</td>
+      </tr>
+      <tr>
+        <td class="gt-gate">Eval Harness 執行引擎</td>
+        <td class="gt-claimed">自動跑 eval case 驗證品質</td>
+        <td class="gt-status"><span class="gt-dot" style="background:#e0a63c"></span>部分成立，已修復</td>
+        <td class="gt-detail">devos eval run 對 routing 類別真的執行；六階段主流程仍無引擎（刻意不做）</td>
+      </tr>
+      <tr>
+        <td class="gt-gate">Dashboard 唯讀六視圖</td>
+        <td class="gt-claimed">六個檢視只讀不寫</td>
+        <td class="gt-status"><span class="gt-dot" style="background:#22c55e"></span>確認屬實</td>
+        <td class="gt-detail">grep 全檔 0 處 INSERT/UPDATE/DELETE，所有 service 呼叫皆為 get/list_by_*</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-      <div class="card">
-        <div class="card-header">
-          <div class="card-dot amber"></div>
-          <h3>🟡 部分成立，刻意縮小範圍（2 項）</h3>
-        </div>
-        <ul>
-          <li>&bull; Skill Registry 權限比對：devos skill dispatch／run-* 真的檢查並拒絕；既有 6 個 stage 仍繞過（spec §17 刻意分離兩層）</li>
-          <li>&bull; Eval Harness 執行引擎：devos eval run 對 routing 類別真的執行；六階段主流程仍無引擎（刻意不做，需人工裁定）</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-dot cyan"></div>
-          <h3>拆檔重構覆核（service/__init__.py 10839→369 行）</h3>
-        </div>
-        <ul>
-          <li>&bull; 15+ 子模組代理鏈無斷裂，無 circular import</li>
-          <li>&bull; 1392 passed／1 skipped／0 failed（約 17 分鐘）</li>
-        </ul>
-      </div>
-    </div>
 
   </div>
 
