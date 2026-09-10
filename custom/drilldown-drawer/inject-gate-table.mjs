@@ -74,26 +74,32 @@ const bodyRows = rows.map((r) => {
 
 const block = `
 <style id="gate-table-style">
+  /* Sized to match the diagram's own text, not arbitrary HTML defaults: the SVG
+     above is scaled up to fill --archify-reader-width, so its "12px" Legend label
+     renders at ~26px bounding-box height on a wide desktop. Plain HTML text in
+     normal document flow doesn't get that scale-up, so this table's font sizes
+     are picked to look the same size as the diagram's node/legend text at typical
+     desktop widths, not to match some generic "table text" convention. */
   #gate-table-section { max-width: var(--archify-reader-width, 1440px); margin: 28px auto 0; padding: 0 1.5rem; }
   #gate-table-section h2 {
-    font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 4px;
+    font-size: 20px; font-weight: 700; color: var(--text); margin: 0 0 6px;
     display: flex; align-items: center; gap: 8px;
   }
-  #gate-table-section .gt-sub { font-size: 12.5px; color: var(--text-muted); margin: 0 0 14px; }
+  #gate-table-section .gt-sub { font-size: 14px; color: var(--text-muted); margin: 0 0 16px; line-height: 1.6; }
   #gate-table-wrap { overflow-x: auto; border: 1px solid var(--panel-border); border-radius: 10px; background: var(--bg); }
-  #gate-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  #gate-table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
   #gate-table th {
-    text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-    color: var(--text-muted); padding: 10px 14px; border-bottom: 1px solid var(--panel-border);
+    text-align: left; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--text-muted); padding: 12px 16px; border-bottom: 1px solid var(--panel-border);
     background: var(--panel);
   }
-  #gate-table td { padding: 12px 14px; border-bottom: 1px solid var(--panel-border); vertical-align: top; color: var(--text); }
+  #gate-table td { padding: 15px 16px; border-bottom: 1px solid var(--panel-border); vertical-align: top; color: var(--text); }
   #gate-table tr:last-child td { border-bottom: none; }
   #gate-table .gt-gate { font-weight: 600; white-space: nowrap; }
-  #gate-table .gt-claimed, #gate-table .gt-detail { color: var(--text-dim); line-height: 1.6; }
+  #gate-table .gt-claimed, #gate-table .gt-detail { color: var(--text-dim); line-height: 1.65; }
   #gate-table .gt-status { white-space: nowrap; font-weight: 600; }
-  #gate-table .gt-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; }
-  @media (max-width: 720px) { #gate-table-section { padding: 0 1rem; } #gate-table { font-size: 12px; } }
+  #gate-table .gt-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; }
+  @media (max-width: 720px) { #gate-table-section { padding: 0 1rem; } #gate-table { font-size: 14px; } }
 </style>
 <div id="gate-table-section">
   <h2>關卡實況 —— 圖上畫成「關卡」的東西，逐一實測</h2>
