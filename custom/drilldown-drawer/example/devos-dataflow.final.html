@@ -15110,6 +15110,22 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
      it, never narrow below the stock default. */
   .container { max-width: max(1440px, min(94vw, 2200px)) !important; }
 
+  /* The line above fixed the gutters but created a NEW mismatch: archify's SVG
+     fills 100% of .container width against a fixed authored viewBox, so widening
+     .container scales every diagram font up with it (verified via
+     getBoundingClientRect: ~1.96x at a 1805px container here, vs ~1.59x at the
+     stock 1440px) -- but the page's own title/subtitle/toolbar are ordinary HTML
+     text at fixed px, so they stay the same size while the diagram keeps growing
+     on wider screens. The mismatch gets worse the wider the screen, not better.
+     Scale them with vw (like the SVG effectively does) instead of fixed px, so
+     the header/toolbar and the diagram grow together and stay proportioned to
+     each other at any viewport width the .container override above can reach.
+     The clamp() floor matches archify's original fixed sizes so nothing shrinks
+     below stock on a narrow screen. */
+  .header h1 { font-size: clamp(24px, 1.6vw, 34px) !important; }
+  .header .subtitle { font-size: clamp(13px, 0.85vw, 17px) !important; }
+  .toolbar button { font-size: clamp(12px, 0.8vw, 16px) !important; }
+
   #child-drawer {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 2147483000;
     background: var(--bg); border-top: 2px solid var(--panel-border);
