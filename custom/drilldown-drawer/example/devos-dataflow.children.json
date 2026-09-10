@@ -5,36 +5,32 @@
     "summary": "真正的起點是人工寫下的 Spec；devos work create 是把它轉成 WorkItem 的唯一機器入口",
     "items": [
       {
-        "name": "objective",
-        "meta": "目標・人工填寫",
-        "status": "info",
-        "desc": "一句話講這個 WorkItem 要達成什麼，沒有預設值，一定要人工寫。"
-      },
-      {
-        "name": "scope",
-        "meta": "範圍・人工填寫",
-        "status": "info",
-        "desc": "人工填寫這次允許改動的路徑範圍；之後 canonical_target_roots（最終合法目標路徑）跟授權範圍，都是從這裡長出來的，不是系統自己猜的。"
-      },
-      {
-        "name": "acceptance",
-        "meta": "驗收標準・人工填寫",
-        "status": "info",
-        "desc": "人工先寫好「怎樣才算做完」的驗收標準；最後 devos work review 人工審查時比對的就是這份標準，不是事後自動生成、隨便找個理由過關的。"
-      },
-      {
-        "name": "風險旗標",
-        "meta": "人工勾選",
-        "status": "info",
-        "desc": "人工勾選這次改動牽涉到哪些風險類型：是否碰機密資料、是否碰正式環境、是否不可逆、是否只能動特定檔案、是否要走 council 多方會審、是否單人執行。系統後續授權要多嚴格，就是看這裡勾了什麼。",
-        "evidence": "cli/__init__.py:302-338"
-      },
-      {
         "name": "handle_work_create()",
         "meta": "函式・程式碼",
         "status": "info",
-        "desc": "`devos work create` 這個 CLI 指令對應的入口函式，負責接住上面這些人工填寫的欄位，組成一個新的 WorkItem。",
-        "evidence": "cli/__init__.py:1327,1765"
+        "desc": "`devos work create` 一執行就先進這裡；接住人工下的 --intent 參數跟六個風險旗標（--touches-secrets／--touches-production／--irreversible／--scope-files／--council／--solo），依序呼叫下面兩個函式。",
+        "evidence": "cli/__init__.py:1715-1789"
+      },
+      {
+        "name": "create_work_item()",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "用 --intent 當作 user_intent 建立一筆新的 WorkItem。這一步還不會寫入 scope／acceptance，那是下一步的事。",
+        "evidence": "cli/__init__.py:1734-1739"
+      },
+      {
+        "name": "update_work_item_specification()",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "把 scope 跟 acceptance 寫進 WorkItem；如果沒有另外指定 --scope／--acceptance，兩者都會直接退回用 --intent 當預設值。也就是說「objective」不是一個真的獨立存在的欄位——它就是 --intent 這個值，被重複拿來當 user_intent、scope 預設值、acceptance 預設值，最後在建管線那一步才被正式標記為 objective。",
+        "evidence": "cli/__init__.py:1740-1747"
+      },
+      {
+        "name": "風險旗標",
+        "meta": "CLI 參數・在此僅讀取",
+        "status": "info",
+        "desc": "這六個旗標在這裡只是被讀進來、暫存著；真正拿去做風險分類判斷、決定授權嚴格程度的地方是下一個節點「route」的 RoutingInput／route_work_item()，不是在 work_create 這一步就處理掉。",
+        "evidence": "cli/__init__.py:302-338（定義）→ route 節點消費"
       }
     ]
   },
