@@ -29,10 +29,10 @@
     { "id": "complete", "lane": "verification", "col": 5, "width": 105, "type": "frontend", "label": "COMPLETED", "sublabel": "WorkItem 終局", "yOffset": 96 },
     { "id": "retry", "lane": "verification", "col": 4, "width": 105, "type": "messagebus", "label": "work retry", "sublabel": "非自動，需人工介入", "yOffset": 96 },
 
-    { "id": "council", "lane": "side_systems", "col": 0, "width": 150, "type": "external", "label": "Council", "sublabel": "已修復，雙後端跨模型" },
-    { "id": "skill_registry", "lane": "side_systems", "col": 1, "width": 160, "type": "security", "label": "Skill Registry", "sublabel": "部分成立，刻意縮小範圍" },
-    { "id": "eval_harness", "lane": "side_systems", "col": 2, "width": 150, "type": "backend", "label": "Eval Harness", "sublabel": "部分成立，routing 類別已修復" },
-    { "id": "dashboard", "lane": "side_systems", "col": 3, "width": 150, "type": "frontend", "label": "Dashboard", "sublabel": "確認屬實，純唯讀" }
+    { "id": "council", "lane": "side_systems", "col": 0, "width": 220, "type": "external", "label": "Council", "sublabel": "已修復，雙後端跨模型", "yOffset": 0 },
+    { "id": "skill_registry", "lane": "side_systems", "col": 2, "width": 240, "type": "security", "label": "Skill Registry", "sublabel": "部分成立，刻意縮小範圍", "yOffset": 0 },
+    { "id": "eval_harness", "lane": "side_systems", "col": 0, "width": 220, "type": "backend", "label": "Eval Harness", "sublabel": "部分成立，routing 類別已修復", "yOffset": 96 },
+    { "id": "dashboard", "lane": "side_systems", "col": 2, "width": 220, "type": "frontend", "label": "Dashboard", "sublabel": "確認屬實，純唯讀", "yOffset": 96 }
   ],
   "edges": [
     { "from": "work_create", "to": "route" },
