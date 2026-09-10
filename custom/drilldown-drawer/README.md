@@ -150,7 +150,35 @@ and why it matters.
 `example/` contains a complete worked case:
 
 - `devos-dataflow.workflow.json` — the authored archify `workflow` spec
-  (schema v2, showcase quality profile, passes all 9 composition checks)
-- `devos-dataflow.children.json` — the drilldown content for its 10 nodes
+  (schema v2, `standard` quality profile — 13 lanes / 44 nodes, one node per
+  real function call, deliberately dense to match a hand-drawn reference
+  diagram's granularity 1:1; passes composition with 0 errors/5 warnings)
+- `devos-dataflow.children.json` — the drilldown content for its most
+  complex 13 nodes (the ones where a full-sentence explanation adds real
+  value beyond the node's own label)
 - `devos-dataflow.final.html` — the delivered + injected output, openable
   directly in a browser
+
+### A note on matching a hand-drawn diagram's density
+
+This example was rebuilt once to close a real gap: a hand-drawn SVG audit
+diagram of the same system had far more nodes (one per function call) than
+the original archify version (one per pipeline stage), which made the
+archify version look like it was missing systems that, in reality, just
+weren't drawn at that zoom level. The fix was structural, not cosmetic —
+each hand-drawn "row" became its own `lane` (13 lanes total), so every
+function call gets its own node on the main canvas instead of being hidden
+behind a click.
+
+Two schema constraints surfaced while doing this, worth knowing before you
+try the same thing:
+
+- **`col` is capped at 5** (6 columns per lane). You cannot lay out an
+  arbitrary wide row the way free-form SVG allows — split a wide row into
+  a fresh `lane` instead of trying to widen one lane past 6 nodes.
+- **`mainPath` must be column-monotonic.** If your diagram restarts at
+  `col: 0` for every new lane (as this one does — each lane is its own
+  left-to-right row), you cannot list all of it in `mainPath`; the
+  validator rejects any step that moves backward in column. `mainPath` is
+  optional — omit it entirely for a diagram shaped like this one and rely
+  on `edges` alone.

@@ -2,223 +2,141 @@
   "schema_version": 2,
   "diagram_type": "workflow",
   "meta": {
-    "title": "development-os Governance Pipeline",
-    "output": "devos-dataflow.html",
-    "quality_profile": "showcase"
+    "title": "development-os 功能關係圖",
+    "subtitle": "誰是誰的前置、交出去的是什麼 — 2026-09-10 程式碼實查",
+    "output": "devos-dataflow-v2.html",
+    "quality_profile": "standard"
   },
   "lanes": [
-    {
-      "id": "pipeline",
-      "label": "CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行"
-    },
-    {
-      "id": "verification",
-      "label": "Verification-basic → 人工裁定 → 終局/重試"
-    }
-  ],
-  "phases": [
-    {
-      "id": "intake",
-      "label": "分類與建管線",
-      "fromCol": 0,
-      "toCol": 2
-    },
-    {
-      "id": "build",
-      "label": "Development-basic 沙盒執行",
-      "fromCol": 3,
-      "toCol": 5,
-      "variant": "emphasis"
-    }
-  ],
-  "mainPath": [
-    "work_create",
-    "route",
-    "pipeline",
-    "authorize",
-    "builder",
-    "codehealth",
-    "verification",
-    "review",
-    "complete"
+    { "id": "a1_creation", "label": "A1 · WorkItem 建立" },
+    { "id": "a2_routing", "label": "A2 · Router 分類" },
+    { "id": "a3_pipeline", "label": "A3 · 建管線" },
+    { "id": "b1_development", "label": "B1 · Development-basic 起步" },
+    { "id": "b2_builder", "label": "B2 · Builder 沙盒鏈" },
+    { "id": "b3_codehealth", "label": "B3 · CodeHealth 檢查" },
+    { "id": "c_verification", "label": "C · Verification-basic（獨立第二個 WorkflowRun）" },
+    { "id": "d1_decision", "label": "D1 · 人工終局裁定" },
+    { "id": "d2_outcome", "label": "D2 · 裁定結果" },
+    { "id": "e_council", "label": "E1 · Council 雙盲多方審議" },
+    { "id": "e_skill", "label": "E2 · Skill Registry" },
+    { "id": "e_eval", "label": "E3 · Eval Harness" },
+    { "id": "e_dashboard", "label": "E4 · Dashboard（唯讀）" }
   ],
   "nodes": [
-    {
-      "id": "work_create",
-      "lane": "pipeline",
-      "col": 0,
-      "width": 90,
-      "type": "frontend",
-      "label": "work create",
-      "sublabel": "devos CLI"
-    },
-    {
-      "id": "route",
-      "lane": "pipeline",
-      "col": 1,
-      "width": 60,
-      "type": "backend",
-      "label": "Router",
-      "sublabel": "已修復"
-    },
-    {
-      "id": "pipeline",
-      "lane": "pipeline",
-      "col": 2,
-      "width": 90,
-      "type": "backend",
-      "label": "建管線",
-      "sublabel": "6 支建齊"
-    },
-    {
-      "id": "authorize",
-      "lane": "pipeline",
-      "col": 3,
-      "width": 90,
-      "type": "security",
-      "label": "authorize",
-      "sublabel": "已修復"
-    },
-    {
-      "id": "builder",
-      "lane": "pipeline",
-      "col": 3,
-      "width": 90,
-      "type": "cloud",
-      "label": "Builder",
-      "sublabel": "沙盒隔離",
-      "yOffset": 96
-    },
-    {
-      "id": "codehealth",
-      "lane": "pipeline",
-      "col": 4,
-      "width": 100,
-      "type": "backend",
-      "label": "CodeHealth",
-      "sublabel": "已修復",
-      "yOffset": 96
-    },
-    {
-      "id": "verification",
-      "lane": "verification",
-      "col": 4,
-      "width": 105,
-      "type": "backend",
-      "label": "Verification",
-      "sublabel": "雙重檢查",
-      "yOffset": 0
-    },
-    {
-      "id": "review",
-      "lane": "verification",
-      "col": 5,
-      "width": 100,
-      "type": "security",
-      "label": "work review",
-      "sublabel": "人工裁定",
-      "yOffset": 0
-    },
-    {
-      "id": "complete",
-      "lane": "verification",
-      "col": 5,
-      "width": 95,
-      "type": "frontend",
-      "label": "COMPLETED",
-      "sublabel": "WorkItem",
-      "yOffset": 96
-    },
-    {
-      "id": "retry",
-      "lane": "verification",
-      "col": 4,
-      "width": 95,
-      "type": "messagebus",
-      "label": "work retry",
-      "sublabel": "重試迴圈",
-      "yOffset": 96
-    }
+    { "id": "work_create", "lane": "a1_creation", "col": 0, "type": "frontend", "label": "devos work create", "sublabel": "CLI 入口", "width": 140 },
+    { "id": "handle_work_create", "lane": "a1_creation", "col": 1, "type": "backend", "label": "handle_work_create()", "sublabel": "cli/__init__.py:1715", "width": 170 },
+    { "id": "create_work_item", "lane": "a1_creation", "col": 2, "type": "backend", "label": "create_work_item()", "sublabel": "建立 WorkItem", "width": 150 },
+    { "id": "update_spec", "lane": "a1_creation", "col": 3, "type": "backend", "label": "update_work_item_specification()", "sublabel": "scope／acceptance", "width": 220 },
+
+    { "id": "routing_input", "lane": "a2_routing", "col": 0, "type": "database", "label": "RoutingInput", "sublabel": "dataclass · 8 個特徵欄位", "width": 150 },
+    { "id": "router_classify", "lane": "a2_routing", "col": 1, "type": "backend", "label": "Router.classify()", "sublabel": "純函式 · router/__init__.py:59", "width": 170 },
+    { "id": "routing_decision", "lane": "a2_routing", "col": 2, "type": "database", "label": "RoutingDecision", "sublabel": "risk_tier／collaboration_depth", "width": 170 },
+    { "id": "route_work_item", "lane": "a2_routing", "col": 3, "type": "backend", "label": "route_work_item()", "sublabel": "cli/__init__.py:1765", "width": 170 },
+    { "id": "build_pipeline", "lane": "a2_routing", "col": 4, "type": "backend", "label": "build_development_verification_pipeline()", "sublabel": "gauntlet/__init__.py:507", "width": 290 },
+
+    { "id": "create_workflow_def", "lane": "a3_pipeline", "col": 0, "type": "backend", "label": "create_workflow_definition() ×2", "sublabel": "development-basic／verification-basic", "width": 220 },
+    { "id": "create_workflow_run", "lane": "a3_pipeline", "col": 1, "type": "backend", "label": "create_workflow_run() ×2", "sublabel": "兩個獨立 WorkflowRun，同一 work_item_id", "width": 190 },
+    { "id": "create_stage_run", "lane": "a3_pipeline", "col": 2, "type": "backend", "label": "create_stage_run() ×6", "sublabel": "一次建齊，狀態 QUEUED", "width": 180 },
+    { "id": "create_handoff", "lane": "a3_pipeline", "col": 3, "type": "database", "label": "create_handoff_contract() ×N", "sublabel": "含 CodeHealth→DeterministicChecks 邊界", "width": 200 },
+    { "id": "set_terminal", "lane": "a3_pipeline", "col": 4, "type": "backend", "label": "set_work_item_selected_terminal_run()", "sublabel": "verification WorkflowRun 是權威終局", "width": 260 },
+
+    { "id": "start_specifier", "lane": "b1_development", "col": 0, "type": "frontend", "label": "devos start --stage Specifier", "sublabel": "execute_specifier_stage()", "width": 210 },
+    { "id": "start_archcheck", "lane": "b1_development", "col": 1, "type": "frontend", "label": "devos start --stage ArchitectureCheck", "sublabel": "execute_architecture_check_stage()", "width": 260 },
+    { "id": "authorize", "lane": "b1_development", "col": 2, "type": "security", "label": "devos authorize", "sublabel": "max_risk_tier 讀 WorkItem.risk_assessment", "width": 210 },
+
+    { "id": "start_builder", "lane": "b2_builder", "col": 0, "type": "frontend", "label": "devos start --stage Builder", "sublabel": "execute_builder_stage()", "width": 190 },
+    { "id": "mutation_allowed", "lane": "b2_builder", "col": 1, "type": "security", "label": "is_mutation_target_allowed()", "sublabel": "MANAGED＋已註冊 sandbox root＋repo clean", "width": 200 },
+    { "id": "validate_approval", "lane": "b2_builder", "col": 2, "type": "security", "label": "_validate_approval_for_builder()", "sublabel": "approval_id／actor／ACTIVE／未過期", "width": 225 },
+    { "id": "gauntlet_execute", "lane": "b2_builder", "col": 3, "type": "security", "label": "ExecutionGauntlet.execute()", "sublabel": "lease+lock+approval 三簽章全過才呼叫 adapter", "width": 200 },
+    { "id": "isolated_mutation", "lane": "b2_builder", "col": 4, "type": "cloud", "label": "run_isolated_mutation()", "sublabel": "git worktree --detach 隔離", "width": 190 },
+
+    { "id": "start_codehealth", "lane": "b3_codehealth", "col": 0, "type": "frontend", "label": "devos start --stage CodeHealth", "sublabel": "execute_code_health_stage()", "width": 200 },
+    { "id": "ratchet", "lane": "b3_codehealth", "col": 1, "type": "backend", "label": "changed_scope_coverage_and_complexity_ratchet()", "sublabel": "一次性凍結 baseline，之後真的比對", "width": 330 },
+    { "id": "mutation_testing", "lane": "b3_codehealth", "col": 2, "type": "backend", "label": "budgeted_mutation_testing()", "sublabel": "try/finally 保證任何例外都還原 repo_path", "width": 200 },
+
+    { "id": "start_deterministic", "lane": "c_verification", "col": 0, "type": "frontend", "label": "devos start --stage DeterministicChecks", "sublabel": "execute_deterministic_checks_stage()", "width": 270 },
+    { "id": "start_independent", "lane": "c_verification", "col": 1, "type": "frontend", "label": "devos start --stage IndependentVerification", "sublabel": "execute_independent_verification_stage()", "width": 300 },
+
+    { "id": "work_review", "lane": "d1_decision", "col": 0, "type": "frontend", "label": "devos work review", "sublabel": "handle_work_review() · 僅限 HUMAN_USER", "width": 190 },
+    { "id": "record_verdict", "lane": "d1_decision", "col": 1, "type": "backend", "label": "record_manual_acceptance_verdict()", "sublabel": "service/work_item.py:760", "width": 240 },
+    { "id": "decision", "lane": "d1_decision", "col": 2, "type": "database", "label": "Decision(accept/reject)", "sublabel": "人工終局裁定", "width": 180 },
+
+    { "id": "completed", "lane": "d2_outcome", "col": 0, "type": "frontend", "label": "accepted → WorkItem COMPLETED", "sublabel": "終局", "width": 220 },
+    { "id": "remediation", "lane": "d2_outcome", "col": 1, "type": "security", "label": "rejected → RemediationDebt + WAITING", "sublabel": "manual_acceptance_rejected（非自動修復，需人工介入）", "width": 260 },
+    { "id": "work_retry", "lane": "d2_outcome", "col": 2, "type": "frontend", "label": "devos work retry", "sublabel": "retry_work_item() → 重建全新 StageRun 圖", "width": 210 },
+
+    { "id": "council_adapter", "lane": "e_council", "col": 0, "type": "external", "label": "Codex/Claude CLI Adapter", "sublabel": "雙後端皆可執行", "width": 190 },
+    { "id": "council_double_blind", "lane": "e_council", "col": 1, "type": "backend", "label": "run_double_blind_proposal()", "sublabel": "雙判官預設跨模型判定", "width": 200 },
+    { "id": "council_cli", "lane": "e_council", "col": 2, "type": "frontend", "label": "devos council run", "sublabel": "--backends codex,claude（預設值）", "width": 190 },
+
+    { "id": "skill_def", "lane": "e_skill", "col": 0, "type": "database", "label": "SkillDefinition.permissions", "sublabel": "requested_capabilities 真的核對", "width": 200 },
+    { "id": "skill_reg", "lane": "e_skill", "col": 1, "type": "database", "label": "SkillRegistration.status==ACTIVE", "sublabel": "缺宣告即 SkillPermissionDeniedError", "width": 220 },
+    { "id": "skill_dispatch", "lane": "e_skill", "col": 2, "type": "frontend", "label": "devos skill dispatch／run-*", "sublabel": "7 種技能皆有真實執行內容；既有 6 個 stage 仍繞過（spec 刻意分離）", "width": 250 },
+
+    { "id": "eval_service", "lane": "e_eval", "col": 0, "type": "backend", "label": "EvalService（彙總報表）", "sublabel": "純聚合既有 EvalRun", "width": 190 },
+    { "id": "eval_run", "lane": "e_eval", "col": 1, "type": "frontend", "label": "devos eval run", "sublabel": "routing 類別真的執行 Router.classify()；六階段主流程仍無引擎", "width": 260 },
+
+    { "id": "dashboard_views", "lane": "e_dashboard", "col": 0, "type": "frontend", "label": "Dashboard 六個檢視", "sublabel": "Portfolio/Blueprint/Queue/Evidence/Decisions/Health", "width": 220 },
+    { "id": "dashboard_readonly", "lane": "e_dashboard", "col": 1, "type": "security", "label": "確認：0 處 INSERT/UPDATE/DELETE", "sublabel": "grep 全檔找不到任何 mutating service 呼叫", "width": 230 }
   ],
   "edges": [
-    {
-      "from": "work_create",
-      "to": "route"
-    },
-    {
-      "from": "route",
-      "to": "pipeline"
-    },
-    {
-      "from": "pipeline",
-      "to": "authorize"
-    },
-    {
-      "from": "authorize",
-      "to": "builder",
-      "variant": "security"
-    },
-    {
-      "from": "builder",
-      "to": "codehealth"
-    },
-    {
-      "from": "codehealth",
-      "to": "verification",
-      "variant": "emphasis"
-    },
-    {
-      "from": "verification",
-      "to": "review"
-    },
-    {
-      "from": "review",
-      "to": "complete",
-      "label": "accept",
-      "variant": "emphasis"
-    },
-    {
-      "from": "review",
-      "to": "retry",
-      "label": "reject",
-      "variant": "security",
-      "role": "error"
-    }
+    { "from": "work_create", "to": "handle_work_create" },
+    { "from": "handle_work_create", "to": "create_work_item" },
+    { "from": "create_work_item", "to": "update_spec" },
+    { "from": "update_spec", "to": "routing_input" },
+    { "from": "routing_input", "to": "router_classify" },
+    { "from": "router_classify", "to": "routing_decision" },
+    { "from": "routing_decision", "to": "route_work_item" },
+    { "from": "route_work_item", "to": "build_pipeline" },
+    { "from": "build_pipeline", "to": "create_workflow_def" },
+    { "from": "create_workflow_def", "to": "create_workflow_run" },
+    { "from": "create_workflow_run", "to": "create_stage_run" },
+    { "from": "create_stage_run", "to": "create_handoff" },
+    { "from": "create_handoff", "to": "set_terminal" },
+    { "from": "set_terminal", "to": "start_specifier" },
+    { "from": "start_specifier", "to": "start_archcheck" },
+    { "from": "start_archcheck", "to": "authorize" },
+    { "from": "authorize", "to": "start_builder", "variant": "security" },
+    { "from": "start_builder", "to": "mutation_allowed" },
+    { "from": "mutation_allowed", "to": "validate_approval" },
+    { "from": "validate_approval", "to": "gauntlet_execute", "label": "approval_id" },
+    { "from": "gauntlet_execute", "to": "isolated_mutation" },
+    { "from": "isolated_mutation", "to": "start_codehealth" },
+    { "from": "start_codehealth", "to": "ratchet" },
+    { "from": "start_codehealth", "to": "mutation_testing", "role": "branch" },
+    { "from": "mutation_testing", "to": "start_deterministic", "label": "HandoffContract", "variant": "emphasis" },
+    { "from": "start_deterministic", "to": "start_independent" },
+    { "from": "start_independent", "to": "work_review", "label": "驗證完成，可人工裁定" },
+    { "from": "work_review", "to": "record_verdict" },
+    { "from": "record_verdict", "to": "decision" },
+    { "from": "decision", "to": "completed", "label": "accept", "variant": "emphasis" },
+    { "from": "decision", "to": "remediation", "label": "reject", "variant": "security", "role": "error" },
+    { "from": "remediation", "to": "work_retry" },
+    { "from": "work_retry", "to": "work_create", "label": "重試迴圈：回到 Band A 重建管線", "variant": "dashed", "role": "error" },
+
+    { "from": "council_adapter", "to": "council_double_blind" },
+    { "from": "council_double_blind", "to": "council_cli" },
+    { "from": "skill_def", "to": "skill_reg" },
+    { "from": "skill_reg", "to": "skill_dispatch" },
+    { "from": "eval_service", "to": "eval_run" },
+    { "from": "dashboard_views", "to": "dashboard_readonly" }
   ],
   "cards": [
-    {
-      "dot": "emerald",
-      "title": "2026-09-10 覆核：8 項已修復仍成立",
-      "items": [
-        "Router／authorize／CodeHealth／Council 四項真的接線（附 file:line 證據）",
-        "全測試套件 1392 passed，0 failed"
-      ]
-    },
-    {
-      "dot": "amber",
-      "title": "部分成立，刻意縮小範圍",
-      "items": [
-        "Skill Registry：dispatch 已檢查，既有 6 stage 仍繞過（spec 刻意分離）",
-        "Eval Harness：routing 類別有引擎，六階段主流程仍無（刻意不做）"
-      ]
-    },
-    {
-      "dot": "cyan",
-      "title": "拆檔重構覆核（service/__init__.py 10839→369 行）",
-      "items": [
-        "15+ 子模組代理鏈無斷裂，無 circular import",
-        "1392 passed／1 skipped／0 failed（約 17 分鐘）"
-      ]
-    }
-  ],
-  "groups": [
-    {
-      "id": "sandbox_gauntlet",
-      "label": "三簽章 fail-closed 沙盒",
-      "lane": "pipeline",
-      "fromCol": 3,
-      "toCol": 3,
-      "variant": "security"
-    }
+    { "dot": "emerald", "title": "🟢 已修復，真的接線（6 項）", "items": [
+      "Router risk_tier 分類：devos work create 建管線前呼叫 route_work_item；risk_tier 不再恆為 None",
+      "devos authorize：無 --force；max_risk_tier 已改讀 WorkItem 實際 risk_assessment",
+      "Sandbox mutation：run_isolated_mutation 唯一呼叫路徑；DirtyBaselineError/ScopeEscapeError fail-closed",
+      "CodeHealth acceptance 守門：ratchet baseline 一次性凍結；mutation-testing try/finally 保證還原",
+      "Council 雙盲多方審議：devos council run 接線；--backends codex,claude 預設雙後端輪派，雙判官跨模型",
+      "Dashboard 唯讀六視圖：grep 全檔 0 處 INSERT/UPDATE/DELETE，所有 service 呼叫皆為 get/list_by_*"
+    ]},
+    { "dot": "amber", "title": "🟡 部分成立，刻意縮小範圍（2 項）", "items": [
+      "Skill Registry 權限比對：devos skill dispatch／run-* 真的檢查並拒絕；既有 6 個 stage 仍繞過（spec §17 刻意分離兩層）",
+      "Eval Harness 執行引擎：devos eval run 對 routing 類別真的執行；六階段主流程仍無引擎（刻意不做，需人工裁定）"
+    ]},
+    { "dot": "cyan", "title": "拆檔重構覆核（service/__init__.py 10839→369 行）", "items": [
+      "15+ 子模組代理鏈無斷裂，無 circular import",
+      "1392 passed／1 skipped／0 failed（約 17 分鐘）"
+    ]}
   ]
 }
