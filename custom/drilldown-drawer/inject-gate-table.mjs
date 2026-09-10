@@ -109,7 +109,14 @@ const block = `
   #gate-table td { padding: 15px 16px; border-bottom: 1px solid var(--panel-border); vertical-align: top; color: var(--text); }
   #gate-table tr:last-child td { border-bottom: none; }
   #gate-table .gt-gate { font-weight: 600; white-space: nowrap; }
-  #gate-table .gt-claimed, #gate-table .gt-detail { color: var(--text-dim); line-height: 1.65; }
+  /* --text-dim (e.g. #475569 in dark Classic) is too low-contrast for body copy
+     someone actually has to read, not just a decorative label -- it was picked
+     without checking against --bg, and these two columns carry the real content
+     (what the diagram claims, how the gate is actually bypassed), not a caption.
+     --text-muted is the same token the diagram's own node sublabels and the
+     Legend row use, so this also keeps the table's secondary-text contrast
+     consistent with the diagram above it instead of inventing a dimmer tier. */
+  #gate-table .gt-claimed, #gate-table .gt-detail { color: var(--text-muted); line-height: 1.65; }
   #gate-table .gt-status { white-space: nowrap; font-weight: 600; }
   #gate-table .gt-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; }
   @media (max-width: 720px) { #gate-table-section { padding: 0 1rem; } #gate-table { font-size: 14px; } }
