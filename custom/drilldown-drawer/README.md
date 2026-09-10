@@ -21,6 +21,49 @@ Before → after, conceptually:
 - After: click a node → the passport still exists, but a bottom drawer also
   opens showing what's actually inside that node, as its own small flow.
 
+## Before you write children.json: verify, don't pattern-match
+
+**This is the part that actually went wrong the first time — read it before writing content.**
+
+Every `desc` (and the call order of `items`) is a factual claim about what the
+code does. It is easy to write a plausible-sounding claim that has a
+`file:line` in `evidence` and still be wrong, because the citation was reused
+from somewhere else instead of re-checked for *this specific claim*.
+
+What actually happened building the `devos-dataflow` example: an earlier,
+genuinely-verified audit had already established (via grep + reading the real
+function) that `work_create`'s real call order was
+`handle_work_create() → create_work_item() → update_work_item_specification()`.
+When the `work_create` drawer content was written afterwards, instead of
+re-reading `handle_work_create()`, it was reconstructed by pattern-matching
+labels already floating around in that audit doc (`objective`, `scope`,
+`acceptance`, the risk flags) into a plausible "human fills a form" story,
+with `handle_work_create()` tacked on *last* as if it consumed the fields.
+That's backwards — `handle_work_create()` runs first — and it also invented a
+persisted `objective` field that doesn't exist (`--intent` is reused as a
+fallback for `scope`/`acceptance`, never stored as its own field). The
+content had citations and read as trustworthy; it wasn't re-verified. A
+human caught it by cross-referencing two independently-drawn diagrams against
+each other — nothing in the tooling would have caught it.
+
+So, before writing or editing an entry in `children.json`:
+
+1. Grep for the real function/class the item names. Open it. Read what it
+   actually does, in what order, with what other calls.
+2. Write `desc` from what you just read, not from a label, an adjacent card,
+   or an older document's prose — even one that itself has real citations.
+   A citation attached to a *different* claim doesn't validate a *new* one
+   built by rearranging it.
+3. Put the file:line you just read in `evidence`, not a remembered one.
+4. If two things you're documenting (e.g. two nodes' drawers, or a drawer vs.
+   an existing diagram) disagree, that's a signal one of them is wrong — chase
+   it down before publishing either.
+
+There is no automated check backing this — `archify validate`/`deliver`
+checks geometry and schema, not factual accuracy of your `desc` strings.
+Skipping this step produces content that looks exactly as trustworthy as
+content that did it properly.
+
 ## Usage
 
 ```bash
