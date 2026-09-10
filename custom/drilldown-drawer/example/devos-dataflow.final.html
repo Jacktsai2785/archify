@@ -5600,7 +5600,12 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
      normal document flow doesn't get that scale-up, so this table's font sizes
      are picked to look the same size as the diagram's node/legend text at typical
      desktop widths, not to match some generic "table text" convention. */
-  #gate-table-section { max-width: var(--archify-reader-width, 1440px); margin: 28px auto 0; padding: 0 1.5rem; }
+  /* Must track the SAME effective width as archify's own .container -- if that has
+     been widened (see the drilldown drawer's .container override for dense diagrams),
+     reusing archify's bare --archify-reader-width fallback here would leave this
+     section narrower than the diagram above it, with large empty gutters on both
+     sides that don't match the diagram's own width. */
+  #gate-table-section { max-width: max(1440px, min(94vw, 2200px)); margin: 28px auto 0; padding: 0 1.5rem; }
   #gate-table-section h2 {
     font-size: 20px; font-weight: 700; color: var(--text); margin: 0 0 6px;
     display: flex; align-items: center; gap: 8px;

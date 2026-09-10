@@ -11,6 +11,14 @@
 // diagram used a real 4-column table for exactly this content and was more legible.
 // This restores that shape without touching archify's own rendering.
 //
+// Gotcha: this section's max-width hardcodes the same max(1440px, min(94vw, 2200px))
+// formula as inject-drilldown.mjs's `.container` override, so the table lines up with
+// the diagram above it instead of being capped at archify's stock 1440px while the
+// diagram (if already widened) fills the full reader width. If you ever change that
+// formula in inject-drilldown.mjs, change it here too -- and if you run this script
+// WITHOUT inject-drilldown.mjs first, `.container` stays at the stock 1440px while
+// this section is already widened, which is the same mismatch in reverse.
+//
 // Usage:
 //   node inject-gate-table.mjs <delivered.html> <rows.json> <output.html>
 //
@@ -80,7 +88,12 @@ const block = `
      normal document flow doesn't get that scale-up, so this table's font sizes
      are picked to look the same size as the diagram's node/legend text at typical
      desktop widths, not to match some generic "table text" convention. */
-  #gate-table-section { max-width: var(--archify-reader-width, 1440px); margin: 28px auto 0; padding: 0 1.5rem; }
+  /* Must track the SAME effective width as archify's own .container -- if that has
+     been widened (see the drilldown drawer's .container override for dense diagrams),
+     reusing archify's bare --archify-reader-width fallback here would leave this
+     section narrower than the diagram above it, with large empty gutters on both
+     sides that don't match the diagram's own width. */
+  #gate-table-section { max-width: max(1440px, min(94vw, 2200px)); margin: 28px auto 0; padding: 0 1.5rem; }
   #gate-table-section h2 {
     font-size: 20px; font-weight: 700; color: var(--text); margin: 0 0 6px;
     display: flex; align-items: center; gap: 8px;
