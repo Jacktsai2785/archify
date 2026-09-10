@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="archify 2.17.0-dev.1">
-  <title>development-os 功能關係圖 Diagram</title>
+  <title>development-os Governance Pipeline Diagram</title>
   <script>
     // Resolve the theme before first paint so light-preference users don't
     // see a dark flash. The toolbar script below re-applies with UI state.
@@ -5081,7 +5081,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
            data-preset-badge-blueprint="BLUEPRINT / REV 01"
            data-preset-badge-editorial="EDITORIAL / FIELD NOTE">
         <div class="pulse-dot"></div>
-        <h1>development-os 功能關係圖</h1>
+        <h1>development-os Governance Pipeline</h1>
       </div>
       <p class="subtitle">誰是誰的前置、交出去的是什麼 — 2026-09-10 程式碼實查</p>
     </div>
@@ -5131,8 +5131,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     <!-- Main Diagram -->
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="ARCHIFY / PLATE 04">
-      <svg viewBox="0 0 2308 1912" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="standard">
-        <title id="archify-diagram-title">development-os 功能關係圖</title>
+      <svg viewBox="0 0 986 1062" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase">
+        <title id="archify-diagram-title">development-os Governance Pipeline</title>
         <desc id="archify-diagram-description">誰是誰的前置、交出去的是什麼 — 2026-09-10 程式碼實查</desc>
         <!-- Definitions -->
         <defs>
@@ -5157,44 +5157,14 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <rect width="100%" height="100%" fill="url(#grid)" />
 
         <!-- Swimlanes -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-0" x="40" y="52" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="74" class="t-dim" font-size="10" font-weight="600">01 / A1 · WorkItem 建立</text>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-0" x="40" y="52" width="904" height="282" rx="10" class="c-lane" stroke-width="1"/>
+        <text x="54" y="74" class="t-dim" font-size="10" font-weight="600">01 / CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行</text>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-1" x="40" y="188" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="210" class="t-dim" font-size="10" font-weight="600">02 / A2 · Router 分類</text>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-1" x="40" y="354" width="904" height="282" rx="10" class="c-lane" stroke-width="1"/>
+        <text x="54" y="376" class="t-dim" font-size="10" font-weight="600">02 / Verification-basic → 人工裁定 → 終局/重試</text>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-2" x="40" y="324" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="346" class="t-dim" font-size="10" font-weight="600">03 / A3 · 建管線</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-3" x="40" y="460" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="482" class="t-dim" font-size="10" font-weight="600">04 / B1 · Development-basic 起步</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-4" x="40" y="596" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="618" class="t-dim" font-size="10" font-weight="600">05 / B2 · Builder 沙盒鏈</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-5" x="40" y="732" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="754" class="t-dim" font-size="10" font-weight="600">06 / B3 · CodeHealth 檢查</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-6" x="40" y="868" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="890" class="t-dim" font-size="10" font-weight="600">07 / C · Verification-basic（獨立第二個 WorkflowRun）</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-7" x="40" y="1004" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="1026" class="t-dim" font-size="10" font-weight="600">08 / D1 · 人工終局裁定</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-8" x="40" y="1140" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="1162" class="t-dim" font-size="10" font-weight="600">09 / D2 · 裁定結果</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-9" x="40" y="1276" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="1298" class="t-dim" font-size="10" font-weight="600">10 / E1 · Council 雙盲多方審議</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-10" x="40" y="1412" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="1434" class="t-dim" font-size="10" font-weight="600">11 / E2 · Skill Registry</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-11" x="40" y="1548" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="1570" class="t-dim" font-size="10" font-weight="600">12 / E3 · Eval Harness</text>
-
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-12" x="40" y="1684" width="1449" height="104" rx="10" class="c-lane" stroke-width="1"/>
-        <text x="54" y="1706" class="t-dim" font-size="10" font-weight="600">13 / E4 · Dashboard（唯讀）</text>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="lane" data-composition-frame-id="lane-2" x="40" y="656" width="904" height="282" rx="10" class="c-lane" stroke-width="1"/>
+        <text x="54" y="678" class="t-dim" font-size="10" font-weight="600">03 / 旁掛系統 — 圖上畫成關卡／能力，各自獨立入口</text>
 
         <!-- Phase headers -->
 
@@ -5203,660 +5173,238 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 
         <!-- Edge paths -->
-        <path data-edge-from="authorize" data-edge-to="start_builder" data-edge-key="0" data-composition-points="769,553;769,580;294,580;294,663;278,663" d="M 769 553 L 769 580 L 294 580 L 294 663 L 278 663" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
-        <path data-edge-from="build_pipeline" data-edge-to="create_workflow_def" data-edge-key="1" data-composition-points="1310.3,281;1310.3,308;183,308;183,365" d="M 1310.3 281 L 1310.3 308 L 183 308 L 183 365" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="council_adapter" data-edge-to="council_double_blind" data-edge-key="2" data-composition-points="278,1343;396,1343" d="M 278 1343 L 396 1343" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="council_double_blind" data-edge-to="council_cli" data-edge-key="3" data-composition-points="596,1343;674,1343" d="M 596 1343 L 674 1343" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="create_handoff" data-edge-to="set_terminal" data-edge-key="4" data-composition-points="1052.3,417;1052.3,433;1310.3,433;1310.3,417" d="M 1052.3 417 L 1052.3 433 L 1310.3 433 L 1310.3 417" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="create_stage_run" data-edge-to="create_handoff" data-edge-key="5" data-composition-points="859,391;952.3,391" d="M 859 391 L 952.3 391" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="create_work_item" data-edge-to="update_spec" data-edge-key="6" data-composition-points="769,145;769,161;1052.3,161;1052.3,145" d="M 769 145 L 769 161 L 1052.3 161 L 1052.3 145" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="create_workflow_def" data-edge-to="create_workflow_run" data-edge-key="7" data-composition-points="183,417;183,433;496,433;496,417" d="M 183 417 L 183 433 L 496 433 L 496 417" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="create_workflow_run" data-edge-to="create_stage_run" data-edge-key="8" data-composition-points="591,391;679,391" d="M 591 391 L 679 391" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="dashboard_views" data-edge-to="dashboard_readonly" data-edge-key="9" data-composition-points="293,1751;381,1751" d="M 293 1751 L 381 1751" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="decision" data-edge-to="completed" data-edge-label="accept" data-edge-key="10" data-composition-points="769,1097;769,1124;183,1124;183,1181" d="M 769 1097 L 769 1124 L 183 1124 L 183 1181" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="decision" data-edge-to="remediation" data-edge-label="reject" data-edge-key="11" data-composition-points="769,1045;769,988;350,988;350,1207;366,1207" d="M 769 1045 L 769 988 L 350 988 L 350 1207 L 366 1207" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
-        <path data-edge-from="eval_service" data-edge-to="eval_run" data-edge-key="12" data-composition-points="278,1615;366,1615" d="M 278 1615 L 366 1615" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="gauntlet_execute" data-edge-to="isolated_mutation" data-edge-key="13" data-composition-points="1052.3,689;1052.3,705;1310.3,705;1310.3,689" d="M 1052.3 689 L 1052.3 705 L 1310.3 705 L 1310.3 689" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="handle_work_create" data-edge-to="create_work_item" data-edge-key="14" data-composition-points="581,119;694,119" d="M 581 119 L 694 119" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="isolated_mutation" data-edge-to="start_codehealth" data-edge-key="15" data-composition-points="1310.3,689;1310.3,852;183,852;183,825" d="M 1310.3 689 L 1310.3 852 L 183 852 L 183 825" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="mutation_allowed" data-edge-to="validate_approval" data-edge-key="16" data-composition-points="596,663;656.5,663" d="M 596 663 L 656.5 663" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="mutation_testing" data-edge-to="start_deterministic" data-edge-label="HandoffContract" data-edge-key="17" data-composition-points="769,773;769,716;32,716;32,935;48,935" d="M 769 773 L 769 716 L 32 716 L 32 935 L 48 935" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="record_verdict" data-edge-to="decision" data-edge-key="18" data-composition-points="496,1045;496,1029;769,1029;769,1045" d="M 496 1045 L 496 1029 L 769 1029 L 769 1045" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="remediation" data-edge-to="work_retry" data-edge-key="19" data-composition-points="496,1233;496,1249;769,1249;769,1233" d="M 496 1233 L 496 1249 L 769 1249 L 769 1233" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="route_work_item" data-edge-to="build_pipeline" data-edge-key="20" data-composition-points="1052.3,281;1052.3,297;1310.3,297;1310.3,281" d="M 1052.3 281 L 1052.3 297 L 1310.3 297 L 1310.3 281" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="router_classify" data-edge-to="routing_decision" data-edge-key="21" data-composition-points="581,255;684,255" d="M 581 255 L 684 255" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="routing_decision" data-edge-to="route_work_item" data-edge-key="22" data-composition-points="854,255;967.3,255" d="M 854 255 L 967.3 255" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="routing_input" data-edge-to="router_classify" data-edge-key="23" data-composition-points="183,281;183,297;496,297;496,281" d="M 183 281 L 183 297 L 496 297 L 496 281" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="set_terminal" data-edge-to="start_specifier" data-edge-key="24" data-composition-points="1310.3,417;1310.3,444;304,444;304,527;288,527" d="M 1310.3 417 L 1310.3 444 L 304 444 L 304 527 L 288 527" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="skill_def" data-edge-to="skill_reg" data-edge-key="25" data-composition-points="283,1479;386,1479" d="M 283 1479 L 386 1479" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="skill_reg" data-edge-to="skill_dispatch" data-edge-key="26" data-composition-points="606,1479;644,1479" d="M 606 1479 L 644 1479" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="start_archcheck" data-edge-to="authorize" data-edge-key="27" data-composition-points="496,553;496,569;769,569;769,553" d="M 496 553 L 496 569 L 769 569 L 769 553" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="start_builder" data-edge-to="mutation_allowed" data-edge-key="28" data-composition-points="278,663;387,663;387,621;496,621;496,637" d="M 278 663 L 387 663 L 387 621 L 496 621 L 496 637" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="start_codehealth" data-edge-to="mutation_testing" data-edge-key="29" data-composition-points="183,825;183,841;776,841;776,825" d="M 183 825 L 183 841 L 776 841 L 776 825" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="start_codehealth" data-edge-to="ratchet" data-edge-key="30" data-composition-points="183,825;183,841;496,841;496,825" d="M 183 825 L 183 841 L 496 841 L 496 825" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="start_deterministic" data-edge-to="start_independent" data-edge-key="31" data-composition-points="183,961;183,977;496,977;496,961" d="M 183 961 L 183 977 L 496 977 L 496 961" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="start_independent" data-edge-to="work_review" data-edge-label="驗證完成，可人工裁定" data-edge-key="32" data-composition-points="346,935;330,935;330,1124;183,1124;183,1097" d="M 346 935 L 330 935 L 330 1124 L 183 1124 L 183 1097" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="start_specifier" data-edge-to="start_archcheck" data-edge-key="33" data-composition-points="183,553;183,569;496,569;496,553" d="M 183 553 L 183 569 L 496 569 L 496 553" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="update_spec" data-edge-to="routing_input" data-edge-key="34" data-composition-points="1052.3,145;1052.3,172;274,172;274,255;258,255" d="M 1052.3 145 L 1052.3 172 L 274 172 L 274 255 L 258 255" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="validate_approval" data-edge-to="gauntlet_execute" data-edge-label="approval_id" data-edge-key="35" data-composition-points="881.5,663;952.3,663" d="M 881.5 663 L 952.3 663" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="work_create" data-edge-to="handle_work_create" data-edge-key="36" data-composition-points="183,145;183,161;496,161;496,145" d="M 183 145 L 183 161 L 496 161 L 496 145" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="work_retry" data-edge-to="work_create" data-edge-label="重試迴圈：回到 Band A 重建管線" data-edge-key="37" data-composition-points="874,1207;2291.601,1207;2291.601,161;183,161;183,145" d="M 874 1207 L 2291.601 1207 L 2291.601 161 L 183 161 L 183 145" class="a-dashed" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
-        <path data-edge-from="work_review" data-edge-to="record_verdict" data-edge-key="38" data-composition-points="278,1078;294,1078;294,988;360,988;360,1071;376,1071" d="M 278 1078 L 294 1078 L 294 988 L 360 988 L 360 1071 L 376 1071" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="authorize" data-edge-to="builder" data-edge-key="0" data-composition-points="607,234;607,278" d="M 607 234 L 607 278" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="builder" data-edge-to="codehealth" data-edge-key="1" data-composition-points="657,304;685,304" d="M 657 304 L 685 304" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="codehealth" data-edge-to="verification" data-edge-label="HandoffContract" data-edge-key="2" data-composition-points="795,304;956,304;956,468;740,468;740,484" d="M 795 304 L 956 304 L 956 468 L 740 468 L 740 484" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="pipeline_build" data-edge-to="authorize" data-edge-key="3" data-composition-points="499,208;557,208" d="M 499 208 L 557 208" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="retry" data-edge-to="work_create" data-edge-label="重試迴圈：重建管線" data-edge-key="4" data-composition-points="687.5,606;20,606;20,208;73,208" d="M 687.5 606 L 20 606 L 20 208 L 73 208" class="a-dashed" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="review" data-edge-to="complete" data-edge-label="accept" data-edge-key="5" data-composition-points="935.5,510;967.8,510;967.8,606;933,606" d="M 935.5 510 L 967.8 510 L 967.8 606 L 933 606" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="review" data-edge-to="retry" data-edge-label="reject" data-edge-key="6" data-composition-points="935.5,517;956,517;956,564;740,564;740,580" d="M 935.5 517 L 956 517 L 956 564 L 740 564 L 740 580" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
+        <path data-edge-from="route" data-edge-to="pipeline_build" data-edge-key="7" data-composition-points="326,208;399,208" d="M 326 208 L 399 208" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="verification" data-edge-to="review" data-edge-key="8" data-composition-points="797.5,510;825.5,510" d="M 797.5 510 L 825.5 510" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="work_create" data-edge-to="route" data-edge-key="9" data-composition-points="173,208;246,208" d="M 173 208 L 246 208" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
 
         <!-- Nodes -->
-        <g id="node-work_create" data-node-id="work_create" data-node-label="devos work create" tabindex="0" role="button" aria-label="Focus devos work create, CLI 入口, A1 · WorkItem 建立" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="CLI 入口" data-node-context="A1 · WorkItem 建立">
-          <title>devos work create · CLI 入口 · A1 · WorkItem 建立</title>
-          <rect x="113" y="93" width="140" height="52" rx="6" class="c-mask"/>
-          <rect x="113" y="93" width="140" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(119 99) scale(0.6875)">
+        <g id="node-work_create" data-node-id="work_create" data-node-label="work create" tabindex="0" role="button" aria-label="Focus work create, devos CLI 入口, CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="devos CLI 入口" data-node-context="CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行">
+          <title>work create · devos CLI 入口 · CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行</title>
+          <rect x="73" y="182" width="100" height="52" rx="6" class="c-mask"/>
+          <rect x="73" y="182" width="100" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(79 188) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="114" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos work create</text>
-          <text data-detail="context" x="183" y="131" class="t-muted" font-size="8" text-anchor="middle">CLI 入口</text>
+          <text data-node-label="" data-detail-anchor="" x="123" y="203" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">work create</text>
+          <text data-detail="context" x="123" y="220" class="t-muted" font-size="8" text-anchor="middle">devos CLI 入口</text>
         </g>
 
-        <g id="node-handle_work_create" data-node-id="handle_work_create" data-node-label="handle_work_create()" tabindex="0" role="button" aria-label="Focus handle_work_create(), cli/__init__.py:1715, A1 · WorkItem 建立" aria-pressed="false" data-node-kind="backend" data-node-sublabel="cli/__init__.py:1715" data-node-context="A1 · WorkItem 建立">
-          <title>handle_work_create() · cli/__init__.py:1715 · A1 · WorkItem 建立</title>
-          <rect x="411" y="93" width="170" height="52" rx="6" class="c-mask"/>
-          <rect x="411" y="93" width="170" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(417 99) scale(0.6875)">
+        <g id="node-route" data-node-id="route" data-node-label="Router" tabindex="0" role="button" aria-label="Focus Router, 已修復，真的接線, CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行" aria-pressed="false" data-node-kind="backend" data-node-sublabel="已修復，真的接線" data-node-context="CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行">
+          <title>Router · 已修復，真的接線 · CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行</title>
+          <rect x="246" y="182" width="80" height="52" rx="6" class="c-mask"/>
+          <rect x="246" y="182" width="80" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(252 188) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="114" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">handle_work_create()</text>
-          <text data-detail="context" x="496" y="131" class="t-muted" font-size="8" text-anchor="middle">cli/__init__.py:1715</text>
+          <text data-node-label="" data-detail-anchor="" x="286" y="203" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Router</text>
+          <text data-detail="context" x="286" y="220" class="t-muted" font-size="7.5" text-anchor="middle">已修復，真的接線</text>
         </g>
 
-        <g id="node-create_work_item" data-node-id="create_work_item" data-node-label="create_work_item()" tabindex="0" role="button" aria-label="Focus create_work_item(), 建立 WorkItem, A1 · WorkItem 建立" aria-pressed="false" data-node-kind="backend" data-node-sublabel="建立 WorkItem" data-node-context="A1 · WorkItem 建立">
-          <title>create_work_item() · 建立 WorkItem · A1 · WorkItem 建立</title>
-          <rect x="694" y="93" width="150" height="52" rx="6" class="c-mask"/>
-          <rect x="694" y="93" width="150" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(700 99) scale(0.6875)">
+        <g id="node-pipeline_build" data-node-id="pipeline_build" data-node-label="建管線" tabindex="0" role="button" aria-label="Focus 建管線, 6 支 StageRun 建齊, CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行" aria-pressed="false" data-node-kind="backend" data-node-sublabel="6 支 StageRun 建齊" data-node-context="CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行">
+          <title>建管線 · 6 支 StageRun 建齊 · CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行</title>
+          <rect x="399" y="182" width="100" height="52" rx="6" class="c-mask"/>
+          <rect x="399" y="182" width="100" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(405 188) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="114" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">create_work_item()</text>
-          <text data-detail="context" x="769" y="131" class="t-muted" font-size="8" text-anchor="middle">建立 WorkItem</text>
+          <text data-node-label="" data-detail-anchor="" x="449" y="203" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">建管線</text>
+          <text data-detail="context" x="449" y="220" class="t-muted" font-size="8" text-anchor="middle">6 支 StageRun 建齊</text>
         </g>
 
-        <g id="node-update_spec" data-node-id="update_spec" data-node-label="update_work_item_specification()" tabindex="0" role="button" aria-label="Focus update_work_item_specification(), scope／acceptance, A1 · WorkItem 建立" aria-pressed="false" data-node-kind="backend" data-node-sublabel="scope／acceptance" data-node-context="A1 · WorkItem 建立">
-          <title>update_work_item_specification() · scope／acceptance · A1 · WorkItem 建立</title>
-          <rect x="942.3" y="93" width="220" height="52" rx="6" class="c-mask"/>
-          <rect x="942.3" y="93" width="220" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(948.3 99) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="1052.3" y="114" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">update_work_item_specification()</text>
-          <text data-detail="context" x="1052.3" y="131" class="t-muted" font-size="8" text-anchor="middle">scope／acceptance</text>
-        </g>
-
-        <g id="node-routing_input" data-node-id="routing_input" data-node-label="RoutingInput" tabindex="0" role="button" aria-label="Focus RoutingInput, dataclass · 8 個特徵欄位, A2 · Router 分類" aria-pressed="false" data-node-kind="database" data-node-sublabel="dataclass · 8 個特徵欄位" data-node-context="A2 · Router 分類">
-          <title>RoutingInput · dataclass · 8 個特徵欄位 · A2 · Router 分類</title>
-          <rect x="108" y="229" width="150" height="52" rx="6" class="c-mask"/>
-          <rect x="108" y="229" width="150" height="52" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(114 235) scale(0.6875)">
-            <ellipse cx="8" cy="4" rx="5" ry="2"/>
-            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="250" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">RoutingInput</text>
-          <text data-detail="context" x="183" y="267" class="t-muted" font-size="8" text-anchor="middle">dataclass · 8 個特徵欄位</text>
-        </g>
-
-        <g id="node-router_classify" data-node-id="router_classify" data-node-label="Router.classify()" tabindex="0" role="button" aria-label="Focus Router.classify(), 純函式 · router/__init__.py:59, A2 · Router 分類" aria-pressed="false" data-node-kind="backend" data-node-sublabel="純函式 · router/__init__.py:59" data-node-context="A2 · Router 分類">
-          <title>Router.classify() · 純函式 · router/__init__.py:59 · A2 · Router 分類</title>
-          <rect x="411" y="229" width="170" height="52" rx="6" class="c-mask"/>
-          <rect x="411" y="229" width="170" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(417 235) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="250" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Router.classify()</text>
-          <text data-detail="context" x="496" y="267" class="t-muted" font-size="8" text-anchor="middle">純函式 · router/__init__.py:59</text>
-        </g>
-
-        <g id="node-routing_decision" data-node-id="routing_decision" data-node-label="RoutingDecision" tabindex="0" role="button" aria-label="Focus RoutingDecision, risk_tier／collaboration_depth, A2 · Router 分類" aria-pressed="false" data-node-kind="database" data-node-sublabel="risk_tier／collaboration_depth" data-node-context="A2 · Router 分類">
-          <title>RoutingDecision · risk_tier／collaboration_depth · A2 · Router 分類</title>
-          <rect x="684" y="229" width="170" height="52" rx="6" class="c-mask"/>
-          <rect x="684" y="229" width="170" height="52" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(690 235) scale(0.6875)">
-            <ellipse cx="8" cy="4" rx="5" ry="2"/>
-            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="250" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">RoutingDecision</text>
-          <text data-detail="context" x="769" y="267" class="t-muted" font-size="8" text-anchor="middle">risk_tier／collaboration_depth</text>
-        </g>
-
-        <g id="node-route_work_item" data-node-id="route_work_item" data-node-label="route_work_item()" tabindex="0" role="button" aria-label="Focus route_work_item(), cli/__init__.py:1765, A2 · Router 分類" aria-pressed="false" data-node-kind="backend" data-node-sublabel="cli/__init__.py:1765" data-node-context="A2 · Router 分類">
-          <title>route_work_item() · cli/__init__.py:1765 · A2 · Router 分類</title>
-          <rect x="967.3" y="229" width="170" height="52" rx="6" class="c-mask"/>
-          <rect x="967.3" y="229" width="170" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(973.3 235) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="1052.3" y="250" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">route_work_item()</text>
-          <text data-detail="context" x="1052.3" y="267" class="t-muted" font-size="8" text-anchor="middle">cli/__init__.py:1765</text>
-        </g>
-
-        <g id="node-build_pipeline" data-node-id="build_pipeline" data-node-label="build_development_verification_pipeline()" tabindex="0" role="button" aria-label="Focus build_development_verification_pipeline(), gauntlet/__init__.py:507, A2 · Router 分類" aria-pressed="false" data-node-kind="backend" data-node-sublabel="gauntlet/__init__.py:507" data-node-context="A2 · Router 分類">
-          <title>build_development_verification_pipeline() · gauntlet/__init__.py:507 · A2 · Router 分類</title>
-          <rect x="1165.3" y="229" width="290" height="52" rx="6" class="c-mask"/>
-          <rect x="1165.3" y="229" width="290" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(1171.3 235) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="1310.3" y="250" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">build_development_verification_pipeline()</text>
-          <text data-detail="context" x="1310.3" y="267" class="t-muted" font-size="8" text-anchor="middle">gauntlet/__init__.py:507</text>
-        </g>
-
-        <g id="node-create_workflow_def" data-node-id="create_workflow_def" data-node-label="create_workflow_definition() ×2" tabindex="0" role="button" aria-label="Focus create_workflow_definition() ×2, development-basic／verification-basic, A3 · 建管線" aria-pressed="false" data-node-kind="backend" data-node-sublabel="development-basic／verification-basic" data-node-context="A3 · 建管線">
-          <title>create_workflow_definition() ×2 · development-basic／verification-basic · A3 · 建管線</title>
-          <rect x="73" y="365" width="220" height="52" rx="6" class="c-mask"/>
-          <rect x="73" y="365" width="220" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(79 371) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="386" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">create_workflow_definition() ×2</text>
-          <text data-detail="context" x="183" y="403" class="t-muted" font-size="8" text-anchor="middle">development-basic／verification-basic</text>
-        </g>
-
-        <g id="node-create_workflow_run" data-node-id="create_workflow_run" data-node-label="create_workflow_run() ×2" tabindex="0" role="button" aria-label="Focus create_workflow_run() ×2, 兩個獨立 WorkflowRun，同一 work_item_id, A3 · 建管線" aria-pressed="false" data-node-kind="backend" data-node-sublabel="兩個獨立 WorkflowRun，同一 work_item_id" data-node-context="A3 · 建管線">
-          <title>create_workflow_run() ×2 · 兩個獨立 WorkflowRun，同一 work_item_id · A3 · 建管線</title>
-          <rect x="401" y="365" width="190" height="52" rx="6" class="c-mask"/>
-          <rect x="401" y="365" width="190" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(407 371) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="386" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">create_workflow_run() ×2</text>
-          <text data-detail="context" x="496" y="403" class="t-muted" font-size="7.7" text-anchor="middle">兩個獨立 WorkflowRun，同一 work_item_id</text>
-        </g>
-
-        <g id="node-create_stage_run" data-node-id="create_stage_run" data-node-label="create_stage_run() ×6" tabindex="0" role="button" aria-label="Focus create_stage_run() ×6, 一次建齊，狀態 QUEUED, A3 · 建管線" aria-pressed="false" data-node-kind="backend" data-node-sublabel="一次建齊，狀態 QUEUED" data-node-context="A3 · 建管線">
-          <title>create_stage_run() ×6 · 一次建齊，狀態 QUEUED · A3 · 建管線</title>
-          <rect x="679" y="365" width="180" height="52" rx="6" class="c-mask"/>
-          <rect x="679" y="365" width="180" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(685 371) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="386" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">create_stage_run() ×6</text>
-          <text data-detail="context" x="769" y="403" class="t-muted" font-size="8" text-anchor="middle">一次建齊，狀態 QUEUED</text>
-        </g>
-
-        <g id="node-create_handoff" data-node-id="create_handoff" data-node-label="create_handoff_contract() ×N" tabindex="0" role="button" aria-label="Focus create_handoff_contract() ×N, 含 CodeHealth→DeterministicChecks 邊界, A3 · 建管線" aria-pressed="false" data-node-kind="database" data-node-sublabel="含 CodeHealth→DeterministicChecks 邊界" data-node-context="A3 · 建管線">
-          <title>create_handoff_contract() ×N · 含 CodeHealth→DeterministicChecks 邊界 · A3 · 建管線</title>
-          <rect x="952.3" y="365" width="200" height="52" rx="6" class="c-mask"/>
-          <rect x="952.3" y="365" width="200" height="52" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(958.3 371) scale(0.6875)">
-            <ellipse cx="8" cy="4" rx="5" ry="2"/>
-            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="1052.3" y="386" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">create_handoff_contract() ×N</text>
-          <text data-detail="context" x="1052.3" y="403" class="t-muted" font-size="8" text-anchor="middle">含 CodeHealth→DeterministicChecks 邊界</text>
-        </g>
-
-        <g id="node-set_terminal" data-node-id="set_terminal" data-node-label="set_work_item_selected_terminal_run()" tabindex="0" role="button" aria-label="Focus set_work_item_selected_terminal_run(), verification WorkflowRun 是權威終局, A3 · 建管線" aria-pressed="false" data-node-kind="backend" data-node-sublabel="verification WorkflowRun 是權威終局" data-node-context="A3 · 建管線">
-          <title>set_work_item_selected_terminal_run() · verification WorkflowRun 是權威終局 · A3 · 建管線</title>
-          <rect x="1180.3" y="365" width="260" height="52" rx="6" class="c-mask"/>
-          <rect x="1180.3" y="365" width="260" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(1186.3 371) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="1310.3" y="386" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">set_work_item_selected_terminal_run()</text>
-          <text data-detail="context" x="1310.3" y="403" class="t-muted" font-size="8" text-anchor="middle">verification WorkflowRun 是權威終局</text>
-        </g>
-
-        <g id="node-start_specifier" data-node-id="start_specifier" data-node-label="devos start --stage Specifier" tabindex="0" role="button" aria-label="Focus devos start --stage Specifier, execute_specifier_stage(), B1 · Development-basic 起步" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="execute_specifier_stage()" data-node-context="B1 · Development-basic 起步">
-          <title>devos start --stage Specifier · execute_specifier_stage() · B1 · Development-basic 起步</title>
-          <rect x="78" y="501" width="210" height="52" rx="6" class="c-mask"/>
-          <rect x="78" y="501" width="210" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(84 507) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="522" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos start --stage Specifier</text>
-          <text data-detail="context" x="183" y="539" class="t-muted" font-size="8" text-anchor="middle">execute_specifier_stage()</text>
-        </g>
-
-        <g id="node-start_archcheck" data-node-id="start_archcheck" data-node-label="devos start --stage ArchitectureCheck" tabindex="0" role="button" aria-label="Focus devos start --stage ArchitectureCheck, execute_architecture_check_stage(), B1 · Development-basic 起步" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="execute_architecture_check_stage()" data-node-context="B1 · Development-basic 起步">
-          <title>devos start --stage ArchitectureCheck · execute_architecture_check_stage() · B1 · Development-basic 起步</title>
-          <rect x="366" y="501" width="260" height="52" rx="6" class="c-mask"/>
-          <rect x="366" y="501" width="260" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(372 507) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="522" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos start --stage ArchitectureCheck</text>
-          <text data-detail="context" x="496" y="539" class="t-muted" font-size="8" text-anchor="middle">execute_architecture_check_stage()</text>
-        </g>
-
-        <g id="node-authorize" data-node-id="authorize" data-node-label="devos authorize" tabindex="0" role="button" aria-label="Focus devos authorize, max_risk_tier 讀 WorkItem.risk_assessment, B1 · Development-basic 起步" aria-pressed="false" data-node-kind="security" data-node-sublabel="max_risk_tier 讀 WorkItem.risk_assessment" data-node-context="B1 · Development-basic 起步">
-          <title>devos authorize · max_risk_tier 讀 WorkItem.risk_assessment · B1 · Development-basic 起步</title>
-          <rect x="664" y="501" width="210" height="52" rx="6" class="c-mask"/>
-          <rect x="664" y="501" width="210" height="52" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(670 507) scale(0.6875)">
+        <g id="node-authorize" data-node-id="authorize" data-node-label="authorize" tabindex="0" role="button" aria-label="Focus authorize, 已修復，讀真實風險, CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行" aria-pressed="false" data-node-kind="security" data-node-sublabel="已修復，讀真實風險" data-node-context="CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行">
+          <title>authorize · 已修復，讀真實風險 · CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行</title>
+          <rect x="557" y="182" width="100" height="52" rx="6" class="c-mask"/>
+          <rect x="557" y="182" width="100" height="52" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(563 188) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="522" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos authorize</text>
-          <text data-detail="context" x="769" y="539" class="t-muted" font-size="8" text-anchor="middle">max_risk_tier 讀 WorkItem.risk_assessment</text>
+          <text data-node-label="" data-detail-anchor="" x="607" y="203" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">authorize</text>
+          <text data-detail="context" x="607" y="220" class="t-muted" font-size="8" text-anchor="middle">已修復，讀真實風險</text>
         </g>
 
-        <g id="node-start_builder" data-node-id="start_builder" data-node-label="devos start --stage Builder" tabindex="0" role="button" aria-label="Focus devos start --stage Builder, execute_builder_stage(), B2 · Builder 沙盒鏈" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="execute_builder_stage()" data-node-context="B2 · Builder 沙盒鏈">
-          <title>devos start --stage Builder · execute_builder_stage() · B2 · Builder 沙盒鏈</title>
-          <rect x="88" y="637" width="190" height="52" rx="6" class="c-mask"/>
-          <rect x="88" y="637" width="190" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(94 643) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="658" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos start --stage Builder</text>
-          <text data-detail="context" x="183" y="675" class="t-muted" font-size="8" text-anchor="middle">execute_builder_stage()</text>
-        </g>
-
-        <g id="node-mutation_allowed" data-node-id="mutation_allowed" data-node-label="is_mutation_target_allowed()" tabindex="0" role="button" aria-label="Focus is_mutation_target_allowed(), MANAGED＋已註冊 sandbox root＋repo clean, B2 · Builder 沙盒鏈" aria-pressed="false" data-node-kind="security" data-node-sublabel="MANAGED＋已註冊 sandbox root＋repo clean" data-node-context="B2 · Builder 沙盒鏈">
-          <title>is_mutation_target_allowed() · MANAGED＋已註冊 sandbox root＋repo clean · B2 · Builder 沙盒鏈</title>
-          <rect x="396" y="637" width="200" height="52" rx="6" class="c-mask"/>
-          <rect x="396" y="637" width="200" height="52" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(402 643) scale(0.6875)">
-            <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
-            <path d="m5.8 8 1.5 1.5 3-3"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="658" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">is_mutation_target_allowed()</text>
-          <text data-detail="context" x="496" y="675" class="t-muted" font-size="8" text-anchor="middle">MANAGED＋已註冊 sandbox root＋repo clean</text>
-        </g>
-
-        <g id="node-validate_approval" data-node-id="validate_approval" data-node-label="_validate_approval_for_builder()" tabindex="0" role="button" aria-label="Focus _validate_approval_for_builder(), approval_id／actor／ACTIVE／未過期, B2 · Builder 沙盒鏈" aria-pressed="false" data-node-kind="security" data-node-sublabel="approval_id／actor／ACTIVE／未過期" data-node-context="B2 · Builder 沙盒鏈">
-          <title>_validate_approval_for_builder() · approval_id／actor／ACTIVE／未過期 · B2 · Builder 沙盒鏈</title>
-          <rect x="656.5" y="637" width="225" height="52" rx="6" class="c-mask"/>
-          <rect x="656.5" y="637" width="225" height="52" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(662.5 643) scale(0.6875)">
-            <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
-            <path d="m5.8 8 1.5 1.5 3-3"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="658" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">_validate_approval_for_builder()</text>
-          <text data-detail="context" x="769" y="675" class="t-muted" font-size="8" text-anchor="middle">approval_id／actor／ACTIVE／未過期</text>
-        </g>
-
-        <g id="node-gauntlet_execute" data-node-id="gauntlet_execute" data-node-label="ExecutionGauntlet.execute()" tabindex="0" role="button" aria-label="Focus ExecutionGauntlet.execute(), lease+lock+approval 三簽章全過才呼叫 adapter, B2 · Builder 沙盒鏈" aria-pressed="false" data-node-kind="security" data-node-sublabel="lease+lock+approval 三簽章全過才呼叫 adapter" data-node-context="B2 · Builder 沙盒鏈">
-          <title>ExecutionGauntlet.execute() · lease+lock+approval 三簽章全過才呼叫 adapter · B2 · Builder 沙盒鏈</title>
-          <rect x="952.3" y="637" width="200" height="52" rx="6" class="c-mask"/>
-          <rect x="952.3" y="637" width="200" height="52" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(958.3 643) scale(0.6875)">
-            <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
-            <path d="m5.8 8 1.5 1.5 3-3"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="1052.3" y="658" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">ExecutionGauntlet.execute()</text>
-          <text data-detail="context" x="1052.3" y="675" class="t-muted" font-size="7.2" text-anchor="middle">lease+lock+approval 三簽章全過才呼叫 adapter</text>
-        </g>
-
-        <g id="node-isolated_mutation" data-node-id="isolated_mutation" data-node-label="run_isolated_mutation()" tabindex="0" role="button" aria-label="Focus run_isolated_mutation(), git worktree --detach 隔離, B2 · Builder 沙盒鏈" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="git worktree --detach 隔離" data-node-context="B2 · Builder 沙盒鏈">
-          <title>run_isolated_mutation() · git worktree --detach 隔離 · B2 · Builder 沙盒鏈</title>
-          <rect x="1215.3" y="637" width="190" height="52" rx="6" class="c-mask"/>
-          <rect x="1215.3" y="637" width="190" height="52" rx="6" class="c-cloud" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(1221.3 643) scale(0.6875)">
+        <g id="node-builder" data-node-id="builder" data-node-label="Builder" tabindex="0" role="button" aria-label="Focus Builder, 三簽章沙盒隔離, CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="三簽章沙盒隔離" data-node-context="CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行">
+          <title>Builder · 三簽章沙盒隔離 · CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行</title>
+          <rect x="557" y="278" width="100" height="52" rx="6" class="c-mask"/>
+          <rect x="557" y="278" width="100" height="52" rx="6" class="c-cloud" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(563 284) scale(0.6875)">
             <path d="M4.3 12.5h7.3a2.4 2.4 0 0 0 .2-4.8 4 4 0 0 0-7.5-1.3A3.1 3.1 0 0 0 4.3 12.5Z"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="1310.3" y="658" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">run_isolated_mutation()</text>
-          <text data-detail="context" x="1310.3" y="675" class="t-muted" font-size="8" text-anchor="middle">git worktree --detach 隔離</text>
+          <text data-node-label="" data-detail-anchor="" x="607" y="299" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Builder</text>
+          <text data-detail="context" x="607" y="316" class="t-muted" font-size="8" text-anchor="middle">三簽章沙盒隔離</text>
         </g>
 
-        <g id="node-start_codehealth" data-node-id="start_codehealth" data-node-label="devos start --stage CodeHealth" tabindex="0" role="button" aria-label="Focus devos start --stage CodeHealth, execute_code_health_stage(), B3 · CodeHealth 檢查" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="execute_code_health_stage()" data-node-context="B3 · CodeHealth 檢查">
-          <title>devos start --stage CodeHealth · execute_code_health_stage() · B3 · CodeHealth 檢查</title>
-          <rect x="83" y="773" width="200" height="52" rx="6" class="c-mask"/>
-          <rect x="83" y="773" width="200" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(89 779) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="794" class="t-primary" font-size="10.6" font-weight="600" text-anchor="middle">devos start --stage CodeHealth</text>
-          <text data-detail="context" x="183" y="811" class="t-muted" font-size="8" text-anchor="middle">execute_code_health_stage()</text>
-        </g>
-
-        <g id="node-ratchet" data-node-id="ratchet" data-node-label="changed_scope_coverage_and_complexity_ratchet()" tabindex="0" role="button" aria-label="Focus changed_scope_coverage_and_complexity_ratchet(), 一次性凍結 baseline，之後真的比對, B3 · CodeHealth 檢查" aria-pressed="false" data-node-kind="backend" data-node-sublabel="一次性凍結 baseline，之後真的比對" data-node-context="B3 · CodeHealth 檢查">
-          <title>changed_scope_coverage_and_complexity_ratchet() · 一次性凍結 baseline，之後真的比對 · B3 · CodeHealth 檢查</title>
-          <rect x="331" y="773" width="330" height="52" rx="6" class="c-mask"/>
-          <rect x="331" y="773" width="330" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(337 779) scale(0.6875)">
+        <g id="node-codehealth" data-node-id="codehealth" data-node-label="CodeHealth" tabindex="0" role="button" aria-label="Focus CodeHealth, 已修復，兩項守門, CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行" aria-pressed="false" data-node-kind="backend" data-node-sublabel="已修復，兩項守門" data-node-context="CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行">
+          <title>CodeHealth · 已修復，兩項守門 · CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行</title>
+          <rect x="685" y="278" width="110" height="52" rx="6" class="c-mask"/>
+          <rect x="685" y="278" width="110" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(691 284) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="794" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">changed_scope_coverage_and_complexity_ratchet()</text>
-          <text data-detail="context" x="496" y="811" class="t-muted" font-size="8" text-anchor="middle">一次性凍結 baseline，之後真的比對</text>
+          <text data-node-label="" data-detail-anchor="" x="740" y="299" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">CodeHealth</text>
+          <text data-detail="context" x="740" y="316" class="t-muted" font-size="8" text-anchor="middle">已修復，兩項守門</text>
         </g>
 
-        <g id="node-mutation_testing" data-node-id="mutation_testing" data-node-label="budgeted_mutation_testing()" tabindex="0" role="button" aria-label="Focus budgeted_mutation_testing(), try/finally 保證任何例外都還原 repo_path, B3 · CodeHealth 檢查" aria-pressed="false" data-node-kind="backend" data-node-sublabel="try/finally 保證任何例外都還原 repo_path" data-node-context="B3 · CodeHealth 檢查">
-          <title>budgeted_mutation_testing() · try/finally 保證任何例外都還原 repo_path · B3 · CodeHealth 檢查</title>
-          <rect x="669" y="773" width="200" height="52" rx="6" class="c-mask"/>
-          <rect x="669" y="773" width="200" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(675 779) scale(0.6875)">
+        <g id="node-retry" data-node-id="retry" data-node-label="work retry" tabindex="0" role="button" aria-label="Focus work retry, 非自動，需人工介入, Verification-basic → 人工裁定 → 終局/重試" aria-pressed="false" data-node-kind="messagebus" data-node-sublabel="非自動，需人工介入" data-node-context="Verification-basic → 人工裁定 → 終局/重試">
+          <title>work retry · 非自動，需人工介入 · Verification-basic → 人工裁定 → 終局/重試</title>
+          <rect x="687.5" y="580" width="105" height="52" rx="6" class="c-mask"/>
+          <rect x="687.5" y="580" width="105" height="52" rx="6" class="c-messagebus" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="messagebus" class="semantic-sigil s-messagebus" transform="translate(693.5 586) scale(0.6875)">
+            <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/>
+            <circle cx="5" cy="4.5" r="1" class="sigil-fill"/>
+            <circle cx="10.5" cy="8" r="1" class="sigil-fill"/>
+            <circle cx="7" cy="11.5" r="1" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="740" y="601" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">work retry</text>
+          <text data-detail="context" x="740" y="618" class="t-muted" font-size="8" text-anchor="middle">非自動，需人工介入</text>
+        </g>
+
+        <g id="node-verification" data-node-id="verification" data-node-label="Verification" tabindex="0" role="button" aria-label="Focus Verification, 獨立第二個 WorkflowRun, Verification-basic → 人工裁定 → 終局/重試" aria-pressed="false" data-node-kind="backend" data-node-sublabel="獨立第二個 WorkflowRun" data-node-context="Verification-basic → 人工裁定 → 終局/重試">
+          <title>Verification · 獨立第二個 WorkflowRun · Verification-basic → 人工裁定 → 終局/重試</title>
+          <rect x="682.5" y="484" width="115" height="52" rx="6" class="c-mask"/>
+          <rect x="682.5" y="484" width="115" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(688.5 490) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="794" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">budgeted_mutation_testing()</text>
-          <text data-detail="context" x="769" y="811" class="t-muted" font-size="8" text-anchor="middle">try/finally 保證任何例外都還原 repo_path</text>
+          <text data-node-label="" data-detail-anchor="" x="740" y="505" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Verification</text>
+          <text data-detail="context" x="740" y="522" class="t-muted" font-size="8" text-anchor="middle">獨立第二個 WorkflowRun</text>
         </g>
 
-        <g id="node-start_deterministic" data-node-id="start_deterministic" data-node-label="devos start --stage DeterministicChecks" tabindex="0" role="button" aria-label="Focus devos start --stage DeterministicChecks, execute_deterministic_checks_stage(), C · Verification-basic（獨立第二個 WorkflowRun）" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="execute_deterministic_checks_stage()" data-node-context="C · Verification-basic（獨立第二個 WorkflowRun）">
-          <title>devos start --stage DeterministicChecks · execute_deterministic_checks_stage() · C · Verification-basic（獨立第二個 WorkflowRun）</title>
-          <rect x="48" y="909" width="270" height="52" rx="6" class="c-mask"/>
-          <rect x="48" y="909" width="270" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(54 915) scale(0.6875)">
+        <g id="node-complete" data-node-id="complete" data-node-label="COMPLETED" tabindex="0" role="button" aria-label="Focus COMPLETED, WorkItem 終局, Verification-basic → 人工裁定 → 終局/重試" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="WorkItem 終局" data-node-context="Verification-basic → 人工裁定 → 終局/重試">
+          <title>COMPLETED · WorkItem 終局 · Verification-basic → 人工裁定 → 終局/重試</title>
+          <rect x="828" y="580" width="105" height="52" rx="6" class="c-mask"/>
+          <rect x="828" y="580" width="105" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(834 586) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="930" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos start --stage DeterministicChecks</text>
-          <text data-detail="context" x="183" y="947" class="t-muted" font-size="8" text-anchor="middle">execute_deterministic_checks_stage()</text>
+          <text data-node-label="" data-detail-anchor="" x="880.5" y="601" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">COMPLETED</text>
+          <text data-detail="context" x="880.5" y="618" class="t-muted" font-size="8" text-anchor="middle">WorkItem 終局</text>
         </g>
 
-        <g id="node-start_independent" data-node-id="start_independent" data-node-label="devos start --stage IndependentVerification" tabindex="0" role="button" aria-label="Focus devos start --stage IndependentVerification, execute_independent_verification_stage(), C · Verification-basic（獨立第二個 WorkflowRun）" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="execute_independent_verification_stage()" data-node-context="C · Verification-basic（獨立第二個 WorkflowRun）">
-          <title>devos start --stage IndependentVerification · execute_independent_verification_stage() · C · Verification-basic（獨立第二個 WorkflowRun）</title>
-          <rect x="346" y="909" width="300" height="52" rx="6" class="c-mask"/>
-          <rect x="346" y="909" width="300" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(352 915) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="930" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos start --stage IndependentVerification</text>
-          <text data-detail="context" x="496" y="947" class="t-muted" font-size="8" text-anchor="middle">execute_independent_verification_stage()</text>
-        </g>
-
-        <g id="node-work_review" data-node-id="work_review" data-node-label="devos work review" tabindex="0" role="button" aria-label="Focus devos work review, handle_work_review() · 僅限 HUMAN_USER, D1 · 人工終局裁定" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="handle_work_review() · 僅限 HUMAN_USER" data-node-context="D1 · 人工終局裁定">
-          <title>devos work review · handle_work_review() · 僅限 HUMAN_USER · D1 · 人工終局裁定</title>
-          <rect x="88" y="1045" width="190" height="52" rx="6" class="c-mask"/>
-          <rect x="88" y="1045" width="190" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(94 1051) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="1066" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos work review</text>
-          <text data-detail="context" x="183" y="1083" class="t-muted" font-size="7.9" text-anchor="middle">handle_work_review() · 僅限 HUMAN_USER</text>
-        </g>
-
-        <g id="node-record_verdict" data-node-id="record_verdict" data-node-label="record_manual_acceptance_verdict()" tabindex="0" role="button" aria-label="Focus record_manual_acceptance_verdict(), service/work_item.py:760, D1 · 人工終局裁定" aria-pressed="false" data-node-kind="backend" data-node-sublabel="service/work_item.py:760" data-node-context="D1 · 人工終局裁定">
-          <title>record_manual_acceptance_verdict() · service/work_item.py:760 · D1 · 人工終局裁定</title>
-          <rect x="376" y="1045" width="240" height="52" rx="6" class="c-mask"/>
-          <rect x="376" y="1045" width="240" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(382 1051) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="1066" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">record_manual_acceptance_verdict()</text>
-          <text data-detail="context" x="496" y="1083" class="t-muted" font-size="8" text-anchor="middle">service/work_item.py:760</text>
-        </g>
-
-        <g id="node-decision" data-node-id="decision" data-node-label="Decision(accept/reject)" tabindex="0" role="button" aria-label="Focus Decision(accept/reject), 人工終局裁定, D1 · 人工終局裁定" aria-pressed="false" data-node-kind="database" data-node-sublabel="人工終局裁定" data-node-context="D1 · 人工終局裁定">
-          <title>Decision(accept/reject) · 人工終局裁定 · D1 · 人工終局裁定</title>
-          <rect x="679" y="1045" width="180" height="52" rx="6" class="c-mask"/>
-          <rect x="679" y="1045" width="180" height="52" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(685 1051) scale(0.6875)">
-            <ellipse cx="8" cy="4" rx="5" ry="2"/>
-            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="1066" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Decision(accept/reject)</text>
-          <text data-detail="context" x="769" y="1083" class="t-muted" font-size="8" text-anchor="middle">人工終局裁定</text>
-        </g>
-
-        <g id="node-completed" data-node-id="completed" data-node-label="accepted → WorkItem COMPLETED" tabindex="0" role="button" aria-label="Focus accepted → WorkItem COMPLETED, 終局, D2 · 裁定結果" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="終局" data-node-context="D2 · 裁定結果">
-          <title>accepted → WorkItem COMPLETED · 終局 · D2 · 裁定結果</title>
-          <rect x="73" y="1181" width="220" height="52" rx="6" class="c-mask"/>
-          <rect x="73" y="1181" width="220" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(79 1187) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="1202" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">accepted → WorkItem COMPLETED</text>
-          <text data-detail="context" x="183" y="1219" class="t-muted" font-size="8" text-anchor="middle">終局</text>
-        </g>
-
-        <g id="node-remediation" data-node-id="remediation" data-node-label="rejected → RemediationDebt + WAITING" tabindex="0" role="button" aria-label="Focus rejected → RemediationDebt + WAITING, manual_acceptance_rejected（非自動修復，需人工介入）, D2 · 裁定結果" aria-pressed="false" data-node-kind="security" data-node-sublabel="manual_acceptance_rejected（非自動修復，需人工介入）" data-node-context="D2 · 裁定結果">
-          <title>rejected → RemediationDebt + WAITING · manual_acceptance_rejected（非自動修復，需人工介入） · D2 · 裁定結果</title>
-          <rect x="366" y="1181" width="260" height="52" rx="6" class="c-mask"/>
-          <rect x="366" y="1181" width="260" height="52" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(372 1187) scale(0.6875)">
+        <g id="node-review" data-node-id="review" data-node-label="work review" tabindex="0" role="button" aria-label="Focus work review, 僅 HUMAN_USER 可裁定, Verification-basic → 人工裁定 → 終局/重試" aria-pressed="false" data-node-kind="security" data-node-sublabel="僅 HUMAN_USER 可裁定" data-node-context="Verification-basic → 人工裁定 → 終局/重試">
+          <title>work review · 僅 HUMAN_USER 可裁定 · Verification-basic → 人工裁定 → 終局/重試</title>
+          <rect x="825.5" y="484" width="110" height="52" rx="6" class="c-mask"/>
+          <rect x="825.5" y="484" width="110" height="52" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(831.5 490) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="1202" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">rejected → RemediationDebt + WAITING</text>
-          <text data-detail="context" x="496" y="1219" class="t-muted" font-size="8" text-anchor="middle">manual_acceptance_rejected（非自動修復，需人工介入）</text>
+          <text data-node-label="" data-detail-anchor="" x="880.5" y="505" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">work review</text>
+          <text data-detail="context" x="880.5" y="522" class="t-muted" font-size="8" text-anchor="middle">僅 HUMAN_USER 可裁定</text>
         </g>
 
-        <g id="node-work_retry" data-node-id="work_retry" data-node-label="devos work retry" tabindex="0" role="button" aria-label="Focus devos work retry, retry_work_item() → 重建全新 StageRun 圖, D2 · 裁定結果" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="retry_work_item() → 重建全新 StageRun 圖" data-node-context="D2 · 裁定結果">
-          <title>devos work retry · retry_work_item() → 重建全新 StageRun 圖 · D2 · 裁定結果</title>
-          <rect x="664" y="1181" width="210" height="52" rx="6" class="c-mask"/>
-          <rect x="664" y="1181" width="210" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(670 1187) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="1202" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos work retry</text>
-          <text data-detail="context" x="769" y="1219" class="t-muted" font-size="8" text-anchor="middle">retry_work_item() → 重建全新 StageRun 圖</text>
-        </g>
-
-        <g id="node-council_adapter" data-node-id="council_adapter" data-node-label="Codex/Claude CLI Adapter" tabindex="0" role="button" aria-label="Focus Codex/Claude CLI Adapter, 雙後端皆可執行, E1 · Council 雙盲多方審議" aria-pressed="false" data-node-kind="external" data-node-sublabel="雙後端皆可執行" data-node-context="E1 · Council 雙盲多方審議">
-          <title>Codex/Claude CLI Adapter · 雙後端皆可執行 · E1 · Council 雙盲多方審議</title>
-          <rect x="88" y="1317" width="190" height="52" rx="6" class="c-mask"/>
-          <rect x="88" y="1317" width="190" height="52" rx="6" class="c-external" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(94 1323) scale(0.6875)">
+        <g id="node-council" data-node-id="council" data-node-label="Council" tabindex="0" role="button" aria-label="Focus Council, 已修復，雙後端跨模型, 旁掛系統 — 圖上畫成關卡／能力，各自獨立入口" aria-pressed="false" data-node-kind="external" data-node-sublabel="已修復，雙後端跨模型" data-node-context="旁掛系統 — 圖上畫成關卡／能力，各自獨立入口">
+          <title>Council · 已修復，雙後端跨模型 · 旁掛系統 — 圖上畫成關卡／能力，各自獨立入口</title>
+          <rect x="48" y="786" width="150" height="52" rx="6" class="c-mask"/>
+          <rect x="48" y="786" width="150" height="52" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(54 792) scale(0.6875)">
             <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
             <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="1338" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Codex/Claude CLI Adapter</text>
-          <text data-detail="context" x="183" y="1355" class="t-muted" font-size="8" text-anchor="middle">雙後端皆可執行</text>
+          <text data-node-label="" data-detail-anchor="" x="123" y="807" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Council</text>
+          <text data-detail="context" x="123" y="824" class="t-muted" font-size="8" text-anchor="middle">已修復，雙後端跨模型</text>
         </g>
 
-        <g id="node-council_double_blind" data-node-id="council_double_blind" data-node-label="run_double_blind_proposal()" tabindex="0" role="button" aria-label="Focus run_double_blind_proposal(), 雙判官預設跨模型判定, E1 · Council 雙盲多方審議" aria-pressed="false" data-node-kind="backend" data-node-sublabel="雙判官預設跨模型判定" data-node-context="E1 · Council 雙盲多方審議">
-          <title>run_double_blind_proposal() · 雙判官預設跨模型判定 · E1 · Council 雙盲多方審議</title>
-          <rect x="396" y="1317" width="200" height="52" rx="6" class="c-mask"/>
-          <rect x="396" y="1317" width="200" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(402 1323) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="1338" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">run_double_blind_proposal()</text>
-          <text data-detail="context" x="496" y="1355" class="t-muted" font-size="8" text-anchor="middle">雙判官預設跨模型判定</text>
-        </g>
-
-        <g id="node-council_cli" data-node-id="council_cli" data-node-label="devos council run" tabindex="0" role="button" aria-label="Focus devos council run, --backends codex,claude（預設值）, E1 · Council 雙盲多方審議" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="--backends codex,claude（預設值）" data-node-context="E1 · Council 雙盲多方審議">
-          <title>devos council run · --backends codex,claude（預設值） · E1 · Council 雙盲多方審議</title>
-          <rect x="674" y="1317" width="190" height="52" rx="6" class="c-mask"/>
-          <rect x="674" y="1317" width="190" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(680 1323) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="1338" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos council run</text>
-          <text data-detail="context" x="769" y="1355" class="t-muted" font-size="8" text-anchor="middle">--backends codex,claude（預設值）</text>
-        </g>
-
-        <g id="node-skill_def" data-node-id="skill_def" data-node-label="SkillDefinition.permissions" tabindex="0" role="button" aria-label="Focus SkillDefinition.permissions, requested_capabilities 真的核對, E2 · Skill Registry" aria-pressed="false" data-node-kind="database" data-node-sublabel="requested_capabilities 真的核對" data-node-context="E2 · Skill Registry">
-          <title>SkillDefinition.permissions · requested_capabilities 真的核對 · E2 · Skill Registry</title>
-          <rect x="83" y="1453" width="200" height="52" rx="6" class="c-mask"/>
-          <rect x="83" y="1453" width="200" height="52" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(89 1459) scale(0.6875)">
-            <ellipse cx="8" cy="4" rx="5" ry="2"/>
-            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="1474" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">SkillDefinition.permissions</text>
-          <text data-detail="context" x="183" y="1491" class="t-muted" font-size="8" text-anchor="middle">requested_capabilities 真的核對</text>
-        </g>
-
-        <g id="node-skill_reg" data-node-id="skill_reg" data-node-label="SkillRegistration.status==ACTIVE" tabindex="0" role="button" aria-label="Focus SkillRegistration.status==ACTIVE, 缺宣告即 SkillPermissionDeniedError, E2 · Skill Registry" aria-pressed="false" data-node-kind="database" data-node-sublabel="缺宣告即 SkillPermissionDeniedError" data-node-context="E2 · Skill Registry">
-          <title>SkillRegistration.status==ACTIVE · 缺宣告即 SkillPermissionDeniedError · E2 · Skill Registry</title>
-          <rect x="386" y="1453" width="220" height="52" rx="6" class="c-mask"/>
-          <rect x="386" y="1453" width="220" height="52" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(392 1459) scale(0.6875)">
-            <ellipse cx="8" cy="4" rx="5" ry="2"/>
-            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="1474" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">SkillRegistration.status==ACTIVE</text>
-          <text data-detail="context" x="496" y="1491" class="t-muted" font-size="8" text-anchor="middle">缺宣告即 SkillPermissionDeniedError</text>
-        </g>
-
-        <g id="node-skill_dispatch" data-node-id="skill_dispatch" data-node-label="devos skill dispatch／run-*" tabindex="0" role="button" aria-label="Focus devos skill dispatch／run-*, 7 種技能皆有真實執行內容；既有 6 個 stage 仍繞過（spec 刻意分離）, E2 · Skill Registry" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="7 種技能皆有真實執行內容；既有 6 個 stage 仍繞過（spec 刻意分離）" data-node-context="E2 · Skill Registry">
-          <title>devos skill dispatch／run-* · 7 種技能皆有真實執行內容；既有 6 個 stage 仍繞過（spec 刻意分離） · E2 · Skill Registry</title>
-          <rect x="644" y="1453" width="250" height="52" rx="6" class="c-mask"/>
-          <rect x="644" y="1453" width="250" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(650 1459) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="769" y="1474" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos skill dispatch／run-*</text>
-          <text data-detail="context" x="769" y="1491" class="t-muted" font-size="6.2" text-anchor="middle">7 種技能皆有真實執行內容；既有 6 個 stage 仍繞過（spec 刻意分離）</text>
-        </g>
-
-        <g id="node-eval_service" data-node-id="eval_service" data-node-label="EvalService（彙總報表）" tabindex="0" role="button" aria-label="Focus EvalService（彙總報表）, 純聚合既有 EvalRun, E3 · Eval Harness" aria-pressed="false" data-node-kind="backend" data-node-sublabel="純聚合既有 EvalRun" data-node-context="E3 · Eval Harness">
-          <title>EvalService（彙總報表） · 純聚合既有 EvalRun · E3 · Eval Harness</title>
-          <rect x="88" y="1589" width="190" height="52" rx="6" class="c-mask"/>
-          <rect x="88" y="1589" width="190" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(94 1595) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="1610" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">EvalService（彙總報表）</text>
-          <text data-detail="context" x="183" y="1627" class="t-muted" font-size="8" text-anchor="middle">純聚合既有 EvalRun</text>
-        </g>
-
-        <g id="node-eval_run" data-node-id="eval_run" data-node-label="devos eval run" tabindex="0" role="button" aria-label="Focus devos eval run, routing 類別真的執行 Router.classify()；六階段主流程仍無引擎, E3 · Eval Harness" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="routing 類別真的執行 Router.classify()；六階段主流程仍無引擎" data-node-context="E3 · Eval Harness">
-          <title>devos eval run · routing 類別真的執行 Router.classify()；六階段主流程仍無引擎 · E3 · Eval Harness</title>
-          <rect x="366" y="1589" width="260" height="52" rx="6" class="c-mask"/>
-          <rect x="366" y="1589" width="260" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(372 1595) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="1610" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">devos eval run</text>
-          <text data-detail="context" x="496" y="1627" class="t-muted" font-size="7" text-anchor="middle">routing 類別真的執行 Router.classify()；六階段主流程仍無引擎</text>
-        </g>
-
-        <g id="node-dashboard_views" data-node-id="dashboard_views" data-node-label="Dashboard 六個檢視" tabindex="0" role="button" aria-label="Focus Dashboard 六個檢視, Portfolio/Blueprint/Queue/Evidence/Decisions/Health, E4 · Dashboard（唯讀）" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Portfolio/Blueprint/Queue/Evidence/Decisions/Health" data-node-context="E4 · Dashboard（唯讀）">
-          <title>Dashboard 六個檢視 · Portfolio/Blueprint/Queue/Evidence/Decisions/Health · E4 · Dashboard（唯讀）</title>
-          <rect x="73" y="1725" width="220" height="52" rx="6" class="c-mask"/>
-          <rect x="73" y="1725" width="220" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(79 1731) scale(0.6875)">
-            <rect x="2" y="3" width="12" height="10" rx="2"/>
-            <path d="M2 6.5h12"/>
-            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
-            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="183" y="1746" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Dashboard 六個檢視</text>
-          <text data-detail="context" x="183" y="1763" class="t-muted" font-size="6.9" text-anchor="middle">Portfolio/Blueprint/Queue/Evidence/Decisions/Health</text>
-        </g>
-
-        <g id="node-dashboard_readonly" data-node-id="dashboard_readonly" data-node-label="確認：0 處 INSERT/UPDATE/DELETE" tabindex="0" role="button" aria-label="Focus 確認：0 處 INSERT/UPDATE/DELETE, grep 全檔找不到任何 mutating service 呼叫, E4 · Dashboard（唯讀）" aria-pressed="false" data-node-kind="security" data-node-sublabel="grep 全檔找不到任何 mutating service 呼叫" data-node-context="E4 · Dashboard（唯讀）">
-          <title>確認：0 處 INSERT/UPDATE/DELETE · grep 全檔找不到任何 mutating service 呼叫 · E4 · Dashboard（唯讀）</title>
-          <rect x="381" y="1725" width="230" height="52" rx="6" class="c-mask"/>
-          <rect x="381" y="1725" width="230" height="52" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(387 1731) scale(0.6875)">
+        <g id="node-skill_registry" data-node-id="skill_registry" data-node-label="Skill Registry" tabindex="0" role="button" aria-label="Focus Skill Registry, 部分成立，刻意縮小範圍, 旁掛系統 — 圖上畫成關卡／能力，各自獨立入口" aria-pressed="false" data-node-kind="security" data-node-sublabel="部分成立，刻意縮小範圍" data-node-context="旁掛系統 — 圖上畫成關卡／能力，各自獨立入口">
+          <title>Skill Registry · 部分成立，刻意縮小範圍 · 旁掛系統 — 圖上畫成關卡／能力，各自獨立入口</title>
+          <rect x="206" y="786" width="160" height="52" rx="6" class="c-mask"/>
+          <rect x="206" y="786" width="160" height="52" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(212 792) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="496" y="1746" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">確認：0 處 INSERT/UPDATE/DELETE</text>
-          <text data-detail="context" x="496" y="1763" class="t-muted" font-size="8" text-anchor="middle">grep 全檔找不到任何 mutating service 呼叫</text>
+          <text data-node-label="" data-detail-anchor="" x="286" y="807" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Skill Registry</text>
+          <text data-detail="context" x="286" y="824" class="t-muted" font-size="8" text-anchor="middle">部分成立，刻意縮小範圍</text>
+        </g>
+
+        <g id="node-eval_harness" data-node-id="eval_harness" data-node-label="Eval Harness" tabindex="0" role="button" aria-label="Focus Eval Harness, 部分成立，routing 類別已修復, 旁掛系統 — 圖上畫成關卡／能力，各自獨立入口" aria-pressed="false" data-node-kind="backend" data-node-sublabel="部分成立，routing 類別已修復" data-node-context="旁掛系統 — 圖上畫成關卡／能力，各自獨立入口">
+          <title>Eval Harness · 部分成立，routing 類別已修復 · 旁掛系統 — 圖上畫成關卡／能力，各自獨立入口</title>
+          <rect x="374" y="786" width="150" height="52" rx="6" class="c-mask"/>
+          <rect x="374" y="786" width="150" height="52" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(380 792) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="449" y="807" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Eval Harness</text>
+          <text data-detail="context" x="449" y="824" class="t-muted" font-size="8" text-anchor="middle">部分成立，routing 類別已修復</text>
+        </g>
+
+        <g id="node-dashboard" data-node-id="dashboard" data-node-label="Dashboard" tabindex="0" role="button" aria-label="Focus Dashboard, 確認屬實，純唯讀, 旁掛系統 — 圖上畫成關卡／能力，各自獨立入口" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="確認屬實，純唯讀" data-node-context="旁掛系統 — 圖上畫成關卡／能力，各自獨立入口">
+          <title>Dashboard · 確認屬實，純唯讀 · 旁掛系統 — 圖上畫成關卡／能力，各自獨立入口</title>
+          <rect x="532" y="786" width="150" height="52" rx="6" class="c-mask"/>
+          <rect x="532" y="786" width="150" height="52" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(538 792) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="607" y="807" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Dashboard</text>
+          <text data-detail="context" x="607" y="824" class="t-muted" font-size="8" text-anchor="middle">確認屬實，純唯讀</text>
         </g>
 
         <!-- Edge labels -->
 
 
-
-
-
-
-
-
-
-
-        <g data-detail="context" data-edge-from="decision" data-edge-to="completed" data-edge-label="accept" data-edge-key="10">
-          <rect x="456.6" y="1104" width="38.8" height="14" rx="3" class="c-mask"/>
-          <text x="476" y="1114" class="t-backend" font-size="8" text-anchor="middle">accept</text>
-        </g>
-        <g data-detail="context" data-edge-from="decision" data-edge-to="remediation" data-edge-label="reject" data-edge-key="11">
-          <rect x="540.1" y="968" width="38.8" height="14" rx="3" class="c-mask"/>
-          <text x="559.5" y="978" class="t-security" font-size="8" text-anchor="middle">reject</text>
+        <g data-detail="context" data-edge-from="codehealth" data-edge-to="verification" data-edge-label="HandoffContract" data-edge-key="2">
+          <rect x="807" y="448" width="82" height="14" rx="3" class="c-mask"/>
+          <text x="848" y="458" class="t-backend" font-size="8" text-anchor="middle">HandoffContract</text>
         </g>
 
-
-
-
-
-        <g data-detail="context" data-edge-from="mutation_testing" data-edge-to="start_deterministic" data-edge-label="HandoffContract" data-edge-key="17">
-          <rect x="359.5" y="696" width="82" height="14" rx="3" class="c-mask"/>
-          <text x="400.5" y="706" class="t-backend" font-size="8" text-anchor="middle">HandoffContract</text>
+        <g data-detail="context" data-edge-from="retry" data-edge-to="work_create" data-edge-label="重試迴圈：重建管線" data-edge-key="4">
+          <rect x="305.55" y="586" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="353.75" y="596" class="t-database" font-size="8" text-anchor="middle">重試迴圈：重建管線</text>
+        </g>
+        <g data-detail="context" data-edge-from="review" data-edge-to="complete" data-edge-label="accept" data-edge-key="5">
+          <rect x="931" y="586" width="38.8" height="14" rx="3" class="c-mask"/>
+          <text x="950.4" y="596" class="t-backend" font-size="8" text-anchor="middle">accept</text>
+        </g>
+        <g data-detail="context" data-edge-from="review" data-edge-to="retry" data-edge-label="reject" data-edge-key="6">
+          <rect x="828.6" y="544" width="38.8" height="14" rx="3" class="c-mask"/>
+          <text x="848" y="554" class="t-security" font-size="8" text-anchor="middle">reject</text>
         </g>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        <g data-detail="context" data-edge-from="start_independent" data-edge-to="work_review" data-edge-label="驗證完成，可人工裁定" data-edge-key="32">
-          <rect x="203.5" y="1104" width="106" height="14" rx="3" class="c-mask"/>
-          <text x="256.5" y="1114" class="t-muted" font-size="8" text-anchor="middle">驗證完成，可人工裁定</text>
-        </g>
-
-
-        <g data-detail="context" data-edge-from="validate_approval" data-edge-to="gauntlet_execute" data-edge-label="approval_id" data-edge-key="35">
-          <rect x="885.5" y="643" width="62.8" height="14" rx="3" class="c-mask"/>
-          <text x="916.9" y="653" class="t-muted" font-size="8" text-anchor="middle">approval_id</text>
-        </g>
-
-        <g data-detail="context" data-edge-from="work_retry" data-edge-to="work_create" data-edge-label="重試迴圈：回到 Band A 重建管線" data-edge-key="37">
-          <rect x="1160.3005" y="141" width="154" height="14" rx="3" class="c-mask"/>
-          <text x="1237.3005" y="151" class="t-database" font-size="8" text-anchor="middle">重試迴圈：回到 Band A 重建管線</text>
-        </g>
 
 
         <!-- Legend -->
         <g data-legend="" data-legend-bridge="">
-          <text x="20" y="1812" class="t-primary" font-size="12" font-weight="650">Legend</text>
-          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="User UI" data-legend-x="20" data-legend-baseline="1832" data-legend-width="74">
-            <rect x="20" y="1824" width="14" height="9" rx="2" class="c-frontend" stroke-width="1"/>
-            <text x="42" y="1832" class="t-muted" font-size="7.5" font-weight="500">User UI</text>
+          <text x="20" y="962" class="t-primary" font-size="12" font-weight="650">Legend</text>
+          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="User UI" data-legend-x="20" data-legend-baseline="982" data-legend-width="74">
+            <rect x="20" y="974" width="14" height="9" rx="2" class="c-frontend" stroke-width="1"/>
+            <text x="42" y="982" class="t-muted" font-size="7.5" font-weight="500">User UI</text>
           </g>
-          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="Agent logic" data-legend-x="101" data-legend-baseline="1832" data-legend-width="91">
-            <rect x="101" y="1824" width="14" height="9" rx="2" class="c-backend" stroke-width="1"/>
-            <text x="123" y="1832" class="t-muted" font-size="7.5" font-weight="500">Agent logic</text>
+          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="Agent logic" data-legend-x="101" data-legend-baseline="982" data-legend-width="91">
+            <rect x="101" y="974" width="14" height="9" rx="2" class="c-backend" stroke-width="1"/>
+            <text x="123" y="982" class="t-muted" font-size="7.5" font-weight="500">Agent logic</text>
           </g>
-          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Policy" data-legend-x="199" data-legend-baseline="1832" data-legend-width="70">
-            <rect x="199" y="1824" width="14" height="9" rx="2" class="c-security" stroke-width="1"/>
-            <text x="221" y="1832" class="t-muted" font-size="7.5" font-weight="500">Policy</text>
+          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Policy" data-legend-x="199" data-legend-baseline="982" data-legend-width="70">
+            <rect x="199" y="974" width="14" height="9" rx="2" class="c-security" stroke-width="1"/>
+            <text x="221" y="982" class="t-muted" font-size="7.5" font-weight="500">Policy</text>
           </g>
-          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="Context / trace" data-legend-x="276" data-legend-baseline="1832" data-legend-width="109">
-            <rect x="276" y="1824" width="14" height="9" rx="2" class="c-database" stroke-width="1"/>
-            <text x="298" y="1832" class="t-muted" font-size="7.5" font-weight="500">Context / trace</text>
+          <g data-legend-semantic-kind="messagebus" data-legend-kind="messagebus" data-legend-label="Tool action" data-legend-x="276" data-legend-baseline="982" data-legend-width="91">
+            <rect x="276" y="974" width="14" height="9" rx="2" class="c-messagebus" stroke-width="1"/>
+            <text x="298" y="982" class="t-muted" font-size="7.5" font-weight="500">Tool action</text>
           </g>
-          <g data-legend-semantic-kind="cloud" data-legend-kind="cloud" data-legend-label="Cloud service" data-legend-x="392" data-legend-baseline="1832" data-legend-width="100">
-            <rect x="392" y="1824" width="14" height="9" rx="2" class="c-cloud" stroke-width="1"/>
-            <text x="414" y="1832" class="t-muted" font-size="7.5" font-weight="500">Cloud service</text>
+          <g data-legend-semantic-kind="cloud" data-legend-kind="cloud" data-legend-label="Cloud service" data-legend-x="374" data-legend-baseline="982" data-legend-width="100">
+            <rect x="374" y="974" width="14" height="9" rx="2" class="c-cloud" stroke-width="1"/>
+            <text x="396" y="982" class="t-muted" font-size="7.5" font-weight="500">Cloud service</text>
           </g>
-          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="External system" data-legend-x="499" data-legend-baseline="1832" data-legend-width="109">
-            <rect x="499" y="1824" width="14" height="9" rx="2" class="c-external" stroke-width="1"/>
-            <text x="521" y="1832" class="t-muted" font-size="7.5" font-weight="500">External system</text>
+          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="External system" data-legend-x="481" data-legend-baseline="982" data-legend-width="109">
+            <rect x="481" y="974" width="14" height="9" rx="2" class="c-external" stroke-width="1"/>
+            <text x="503" y="982" class="t-muted" font-size="7.5" font-weight="500">External system</text>
           </g>
         </g>
       </svg>
@@ -15588,52 +15136,58 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   var ICON = {ok:'✓', partial:'●', gap:'✕', info:'i'};
 
   var CHILDREN = {
-  "handle_work_create": {
+  "work_create": {
     "kicker": "ENTRY → CLI",
-    "color": "var(--backend-stroke)",
-    "summary": "devos work create 一次呼叫內，依序建立 WorkItem、補規格、分類、建管線 —— 不是分開的兩段",
+    "color": "var(--frontend-stroke)",
+    "summary": "devos work create 一次呼叫內，依序建立 WorkItem、補規格 —— 是後面分類/建管線的起點，不是分開的兩段",
     "items": [
       {
-        "name": "create_work_item()",
+        "name": "handle_work_create()",
         "meta": "函式・程式碼",
+        "status": "ok",
+        "desc": "devos work create 一執行就先進這裡，接住人工下的 --intent 參數跟六個風險旗標。",
+        "evidence": "cli/__init__.py:1715-1789"
+      },
+      {
+        "name": "create_work_item()",
+        "meta": "函式呼叫",
         "status": "ok",
         "desc": "用 --intent 當作 user_intent 建立一筆新的 WorkItem。這一步還不會寫入 scope/acceptance，只是先開一筆紀錄。",
         "evidence": "cli/__init__.py:1734-1739"
       },
       {
         "name": "update_work_item_specification()",
-        "meta": "函式・程式碼",
+        "meta": "函式呼叫",
         "status": "ok",
         "desc": "把 scope 跟 acceptance 寫進 WorkItem；沒有 --scope/--acceptance 時會 fallback 用 --intent 補齊，objective 不是一個真的獨立存在、會被回讀比對的欄位。",
         "evidence": "cli/__init__.py:1740-1747"
       },
       {
-        "name": "route_work_item()",
-        "meta": "函式呼叫",
-        "status": "ok",
-        "desc": "2026-09-09 稽核後新增：在建管線之前，一定先呼叫這個函式跑 Router.classify()。work create 一定會先分類，不會繞過 Router。",
-        "evidence": "cli/__init__.py:1749 註解, 1765"
-      },
-      {
-        "name": "build_development_verification_pipeline()",
-        "meta": "函式呼叫",
-        "status": "ok",
-        "desc": "分類結果出來後，才依結果建立 6 個 StageRun，一次全部建到 QUEUED 狀態，早於任何授權。",
-        "evidence": "cli/__init__.py:1772"
+        "name": "六個風險旗標",
+        "meta": "CLI 參數・在此僅讀取",
+        "status": "info",
+        "desc": "--touches-prod-data 等六個旗標在這裡只是被讀進來、暫存著；真正拿去做風險分類判斷是下一步 Router 節點。",
+        "evidence": "cli/__init__.py:302-338（定義）→ route 節點消費"
       }
     ]
   },
-  "route_work_item": {
+  "route": {
     "kicker": "ROUTER",
     "color": "var(--backend-stroke)",
-    "summary": "純函式分類，6 個布林旗標決定風險分層，結果直接餵給建管線",
+    "summary": "純函式分類，2026-09-09 稽核後新增：建管線前一定先呼叫，risk_tier 不再恆為 None",
     "items": [
+      {
+        "name": "route_work_item()",
+        "meta": "函式呼叫",
+        "status": "ok",
+        "desc": "2026-09-09 稽核後新增：在建管線之前，一定先呼叫這個函式跑分類。work create 一定會先分類，不會繞過 Router，兩者是同一條路徑內發生的事。",
+        "evidence": "cli/__init__.py:1749 註解, 1765"
+      },
       {
         "name": "RoutingInput",
         "meta": "dataclass・8 個特徵欄位",
         "status": "info",
-        "desc": "把 CLI 旗標（--touches-prod-data、--collab-depth 等）打包成一個特徵物件，交給純函式分類，本身不含任何判斷邏輯。",
-        "evidence": "cli/__init__.py:1749-1765"
+        "desc": "把 CLI 旗標（--touches-prod-data、--collab-depth 等）打包成一個特徵物件，交給純函式分類，本身不含任何判斷邏輯。"
       },
       {
         "name": "Router.classify()",
@@ -15646,8 +15200,51 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         "name": "RoutingDecision",
         "meta": "dataclass",
         "status": "info",
-        "desc": "輸出 risk_tier / collaboration_depth 等欄位，寫回 WorkItem.risk_assessment，後面 devos authorize 就是讀這裡，不再是寫死 MEDIUM。",
-        "evidence": "domain/__init__.py"
+        "desc": "輸出 risk_tier / collaboration_depth 等欄位，寫回 WorkItem.risk_assessment，後面 devos authorize 就是讀這裡，不再是寫死 MEDIUM。"
+      }
+    ]
+  },
+  "pipeline_build": {
+    "kicker": "建管線",
+    "color": "var(--backend-stroke)",
+    "summary": "分類結果一出來，立刻依結果一次建齊 6 個 StageRun，早於任何授權檢查",
+    "items": [
+      {
+        "name": "build_development_verification_pipeline()",
+        "meta": "函式呼叫",
+        "status": "ok",
+        "desc": "route_work_item() 拿到分類結果後立刻呼叫，是唯一負責建管線的進入點。",
+        "evidence": "gauntlet/__init__.py:507"
+      },
+      {
+        "name": "create_workflow_definition() ×2",
+        "meta": "函式呼叫",
+        "status": "ok",
+        "desc": "建立 development-basic 跟 verification-basic 兩套獨立的 workflow 定義。"
+      },
+      {
+        "name": "create_workflow_run() ×2",
+        "meta": "函式呼叫",
+        "status": "ok",
+        "desc": "對應建出兩個獨立的 WorkflowRun，同一個 work_item_id，但彼此沒有結構化的外鍵關聯——WorkflowRun 本身沒有 parent/child 欄位。"
+      },
+      {
+        "name": "create_stage_run() ×6",
+        "meta": "函式呼叫",
+        "status": "ok",
+        "desc": "Specifier…IndependentVerification 六個 stage 一次建齊，狀態全部是 QUEUED，這時候還沒有任何授權發生。"
+      },
+      {
+        "name": "create_handoff_contract() ×N",
+        "meta": "函式呼叫",
+        "status": "ok",
+        "desc": "包含 CodeHealth→DeterministicChecks 這個關鍵邊界的合約紀錄，之後兩個 WorkflowRun 就是靠這個（加上 work_item_id、selected_terminal_run_id）串起來，不是靠外鍵。"
+      },
+      {
+        "name": "set_work_item_selected_terminal_run()",
+        "meta": "函式呼叫",
+        "status": "ok",
+        "desc": "把 verification WorkflowRun 標記成這個 WorkItem 的權威終局，後續判定都認這個 run。"
       }
     ]
   },
@@ -15672,154 +15269,163 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       }
     ]
   },
-  "gauntlet_execute": {
+  "builder": {
     "kicker": "三簽章 fail-closed 沙盒",
-    "color": "var(--security-stroke)",
-    "summary": "lease + lock + approval 三個獨立簽章全部核可，才真的呼叫 agent adapter 動手改檔",
-    "items": [
-      {
-        "name": "lease 檢查",
-        "meta": "簽章 1",
-        "status": "ok",
-        "desc": "確認這個 StageRun 目前持有有效的執行租約，避免同一份工作被重複派工。",
-        "evidence": "gauntlet/__init__.py"
-      },
-      {
-        "name": "lock 檢查",
-        "meta": "簽章 2",
-        "status": "ok",
-        "desc": "確認沒有其他執行中的 lease 搶佔同一個 mutation target；`ExecutionInProgressError` 會在有衝突時直接擋下。",
-        "evidence": "executor/__init__.py:2131-2136"
-      },
-      {
-        "name": "approval 檢查",
-        "meta": "簽章 3",
-        "status": "ok",
-        "desc": "承接 _validate_approval_for_builder() 的結果 —— approval_id 存在、actor 對得上、狀態 ACTIVE、未過期、路徑落在授權範圍內，三者缺一都不會往下呼叫 adapter。",
-        "evidence": "executor/__init__.py:731-"
-      }
-    ]
-  },
-  "isolated_mutation": {
-    "kicker": "SANDBOX",
     "color": "var(--cloud-stroke)",
-    "summary": "真正動手改檔的地方，用 git worktree 隔離，任何異常都 fail-closed",
+    "summary": "execute_builder_stage() 內部四步：先驗證能不能動這個目標，再驗證授權，再三簽章核可，最後才真的隔離改檔",
     "items": [
       {
-        "name": "git worktree --detach",
-        "meta": "隔離機制",
+        "name": "is_mutation_target_allowed()",
+        "meta": "函式呼叫",
         "status": "ok",
-        "desc": "在獨立的 worktree 裡執行變更，不會直接碰觸主要工作目錄，執行完才把結果合併回去。",
+        "desc": "檢查目標是 MANAGED 狀態、已註冊 sandbox root、repo 是乾淨狀態，三者缺一就不會往下走。",
+        "evidence": "executor/__init__.py:2149"
+      },
+      {
+        "name": "_validate_approval_for_builder()",
+        "meta": "函式呼叫",
+        "status": "ok",
+        "desc": "approval_id 存在、actor 對得上、狀態 ACTIVE、未過期、路徑落在授權範圍內——這五個條件都要成立。",
+        "evidence": "executor/__init__.py:2160"
+      },
+      {
+        "name": "ExecutionGauntlet.execute()",
+        "meta": "三簽章",
+        "status": "ok",
+        "desc": "lease（有效執行租約）+ lock（沒有其他執行中的 lease 搶佔同一目標）+ approval（承接上一步的核可結果）三個獨立簽章全部核可，才真的呼叫 agent adapter 動手改檔。",
+        "evidence": "executor/__init__.py:2265"
+      },
+      {
+        "name": "run_isolated_mutation()",
+        "meta": "函式呼叫・沙盒隔離",
+        "status": "ok",
+        "desc": "用 git worktree --detach 隔離執行。DirtyBaselineError（隔離前 repo 不乾淨）跟 ScopeEscapeError（改動超出授權範圍）任一發生都直接中止，fail-closed，不是事後補救。",
         "evidence": "gauntlet/__init__.py:284"
-      },
-      {
-        "name": "DirtyBaselineError",
-        "meta": "raise・fail-closed",
-        "status": "ok",
-        "desc": "如果隔離前偵測到 repo 不是乾淨狀態（有未預期的修改），直接中止，不會在髒的基準上繼續動作。"
-      },
-      {
-        "name": "ScopeEscapeError",
-        "meta": "raise・fail-closed",
-        "status": "ok",
-        "desc": "改動的檔案如果超出授權範圍（approval 的 scope），直接中止，是唯一真正擋住越界改動的機制。"
       }
     ]
   },
-  "create_handoff": {
-    "kicker": "HANDOFFCONTRACT",
-    "color": "var(--database-stroke)",
-    "summary": "上一站交接下來的合約紀錄，被讀取用於門檻檢查，但特定欄位寫了沒人回頭核對",
+  "codehealth": {
+    "kicker": "ACCEPTANCE 守門",
+    "color": "var(--backend-stroke)",
+    "summary": "兩項檢查都已修復；交接給 Verification 的 HandoffContract 有讀取但特定欄位寫了沒人回頭核對",
     "items": [
       {
-        "name": "寫入",
-        "meta": "有真的發生",
+        "name": "changed_scope_coverage_and_complexity_ratchet()",
+        "meta": "已修復",
         "status": "ok",
-        "desc": "objective/scope_snapshot_hash/acceptance_snapshot_hash 這些人工填寫標準的快照，在建管線與各站交接時都會完整寫入。",
-        "evidence": "cli/__init__.py:1777-1778, 1867-1868；domain/__init__.py:1264-1284"
+        "desc": "首次執行一次性凍結 baseline，之後每次真的拿當下狀態去比對，不再是永遠通過的假檢查。"
       },
       {
-        "name": "讀取（門檻用途）",
-        "meta": "有真的發生",
+        "name": "budgeted_mutation_testing()",
+        "meta": "已修復",
         "status": "ok",
-        "desc": "executor 會讀 HandoffContract 確認前一站真的 COMPLETED 才放行下一站，CodeHealth 也靠它拿到 Builder 改了哪些檔案。",
-        "evidence": "executor/__init__.py:132-149, 2423-2427"
+        "desc": "用 try/finally 保證任何例外型別發生時都會把真實 repo_path 還原，不會把測試用的變動遺留在正式路徑上。"
       },
       {
-        "name": "讀取（一致性核對用途）",
+        "name": "HandoffContract 寫入",
+        "meta": "有真的發生",
+        "status": "ok",
+        "desc": "objective/scope_snapshot_hash/acceptance_snapshot_hash 這些人工填寫標準的快照，在這裡交接給 Verification 時會完整寫入。",
+        "evidence": "domain/__init__.py:1264-1284"
+      },
+      {
+        "name": "HandoffContract 讀取（一致性核對用途）",
         "meta": "部分成立・孤兒風險",
         "status": "partial",
-        "desc": "objective/scope_snapshot_hash/acceptance_snapshot_hash 這三個欄位，寫入之後全專案沒有任何地方把它們讀回來、跟當下狀態重新比對；每次需要 hash 都是現算一份新的，不是核對舊的。等於「當初承諾的標準有沒有被遵守」這件事，寫了但沒人真的檢查。"
+        "desc": "這三個欄位寫入之後，全專案沒有任何地方把它們讀回來、跟當下狀態重新比對；每次需要 hash 都是現算一份新的，不是核對舊的。等於「當初承諾的標準有沒有被遵守」這件事，寫了但沒人真的檢查。這個欄位本身有被讀（門檻檢查、拿前一站改了哪些檔案），不是完全孤兒，只是這三個特定欄位是孤兒。"
       }
     ]
   },
-  "decision": {
-    "kicker": "人工終局裁定",
-    "color": "var(--database-stroke)",
-    "summary": "只有 HUMAN_USER 能記錄，且只有 WorkItem 已 COMPLETED 時才合法",
+  "verification": {
+    "kicker": "獨立第二個 WorkflowRun",
+    "color": "var(--backend-stroke)",
+    "summary": "跟 development-basic 是兩個獨立的 WorkflowRun，資料庫沒有 parent/child 外鍵，只靠共同的 work_item_id 串起來",
     "items": [
       {
-        "name": "actor 檢查",
-        "meta": "raise",
+        "name": "devos start --stage DeterministicChecks",
+        "meta": "→ execute_deterministic_checks_stage()",
         "status": "ok",
-        "desc": "actor_type 不是 HUMAN_USER 就直接拋錯，機器/agent 無法自己核可自己。",
-        "evidence": "service/work_item.py:800-801"
+        "desc": "機械化、規則式的檢查，例如 lint、型別檢查這類有固定答案的檢查。"
       },
       {
-        "name": "狀態前提檢查",
-        "meta": "raise",
+        "name": "devos start --stage IndependentVerification",
+        "meta": "→ execute_independent_verification_stage()",
         "status": "ok",
-        "desc": "只有 WorkItem 處於 COMPLETED（驗證已跑完）時才允許記錄裁定，是 fail-closed 的前置條件檢查。",
-        "evidence": "service/work_item.py:814-818"
+        "desc": "第二個子階段，由獨立於原本執行流程的另一套邏輯，重新覆核一次結果。"
+      },
+      {
+        "name": "WorkflowRun 無 parent/child 欄位",
+        "meta": "資料模型事實",
+        "status": "info",
+        "desc": "完整欄位是 workflow_run_id／work_item_id／status／current_stage／current_stage_run_id／aggregate_revision／created_at，沒有任何 parent/child 類欄位。兩個 WorkflowRun（development-basic 跟 verification-basic）靠共同 work_item_id ＋ HandoffContract ＋ WorkItem.selected_terminal_run_id（注意這個欄位長在 WorkItem 上，不是 WorkflowRun 上）串起來，不是外鍵關聯。"
       }
     ]
   },
-  "remediation": {
-    "kicker": "REJECTED",
+  "review": {
+    "kicker": "人工終局裁定",
     "color": "var(--security-stroke)",
-    "summary": "拒絕後不會自動修，狀態卡在 WAITING 直到人工執行 devos work retry",
+    "summary": "只有 HUMAN_USER 能記錄，且只有 WorkItem 已 COMPLETED（驗證跑完）時才合法",
+    "items": [
+      {
+        "name": "devos work review",
+        "meta": "handle_work_review()",
+        "status": "ok",
+        "desc": "驗證完成後，人工用這個指令記錄終局裁定，是唯一的人工終局裁定入口。"
+      },
+      {
+        "name": "record_manual_acceptance_verdict()",
+        "meta": "函式呼叫",
+        "status": "ok",
+        "desc": "actor_type 不是 HUMAN_USER 就直接拋錯，機器/agent 無法自己核可自己；只有 WorkItem 處於 COMPLETED 時才允許記錄，是 fail-closed 的前置條件檢查。",
+        "evidence": "service/work_item.py:760-818"
+      },
+      {
+        "name": "Decision(accept/reject)",
+        "meta": "資料物件",
+        "status": "info",
+        "desc": "裁定結果只有兩種：accept 直接終局，reject 進入 Band D 的補救迴圈（見 work retry 節點）。"
+      }
+    ]
+  },
+  "retry": {
+    "kicker": "重試（僅人工）",
+    "color": "var(--messagebus-stroke)",
+    "summary": "拒絕後不會自動修，狀態卡在 WAITING，直到人工執行 devos work retry 才重建全新管線",
     "items": [
       {
         "name": "RemediationDebt 建立",
         "meta": "domain 物件",
         "status": "ok",
         "desc": "拒絕當下建立一筆 RemediationDebt，狀態 OPEN，跟這次的 Decision／終局 Gate 綁在一起。",
-        "evidence": "domain/__init__.py:1659-1667, 274；service/work_item.py:855-864"
+        "evidence": "domain/__init__.py:1659-1667"
       },
       {
         "name": "WorkItem.status = WAITING",
         "meta": "狀態卡住",
         "status": "partial",
-        "desc": "status_reason_code 設成 manual_acceptance_rejected，且 sync_work_item_status 明確拒絕把這個狀態投影掉——不會自己跳走，必須靠 devos work retry 手動觸發才能往前。",
+        "desc": "status_reason_code 設成 manual_acceptance_rejected，且明確拒絕把這個狀態投影掉——不會自己跳走，必須靠 devos work retry 手動觸發才能往前。",
         "evidence": "service/work_item.py:869-871, 467"
-      }
-    ]
-  },
-  "work_retry": {
-    "kicker": "重試（僅人工）",
-    "color": "var(--frontend-stroke)",
-    "summary": "retry_work_item() 只認 WAITING + manual_acceptance_rejected 這個組合，重建全新的 StageRun 圖",
-    "items": [
+      },
       {
-        "name": "前提檢查",
-        "meta": "raise・fail-closed",
+        "name": "devos work retry",
+        "meta": "raise・fail-closed 前提",
         "status": "ok",
-        "desc": "狀態不是 WAITING 或 reason 不是 manual_acceptance_rejected，直接拒絕，不能對任何其他狀態的 WorkItem 亂重試。",
+        "desc": "retry_work_item() 只認 WAITING + manual_acceptance_rejected 這個狀態組合，不能對任何其他狀態的 WorkItem 亂重試。",
         "evidence": "service/work_item.py:917-921"
       },
       {
-        "name": "重建管線",
-        "meta": "非續跑，是重建",
+        "name": "重建管線（非續跑）",
+        "meta": "回到 Band A",
         "status": "info",
         "desc": "把 WorkItem 狀態清回 ACTIVE 後，CLI 再呼叫一次 build_development_verification_pipeline()，等於重新生一組全新的 StageRun／Evidence；舊的資料留著不動，不是接續舊的重跑。",
-        "evidence": "service/work_item.py:900-916；cli/__init__.py:1862-1870"
+        "evidence": "cli/__init__.py:1862-1870"
       }
     ]
   },
-  "council_cli": {
+  "council": {
     "kicker": "COUNCIL",
     "color": "var(--frontend-stroke)",
-    "summary": "雙後端真的可執行，預設跨模型雙判官，不是同模型自審",
+    "summary": "雙後端真的可執行，預設跨模型雙判官，不是同模型自審——獨立於主管線之外的入口",
     "items": [
       {
         "name": "CodexCliParticipantAdapter / ClaudeCliParticipantAdapter",
@@ -15841,20 +15447,25 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         "status": "ok",
         "desc": "預設值就是雙後端輪派角色，這是稽核發現「零 CLI 接線」之後新增的真實入口。",
         "evidence": "cli/__init__.py:1304-1342, 4715"
+      },
+      {
+        "name": "跟主管線的關係",
+        "meta": "旁掛，非主流程一環",
+        "status": "info",
+        "desc": "不在 execute_*_stage() 的分派鏈裡，是獨立的 CLI 子指令入口，需要另外呼叫，不會被 work create 自動觸發。"
       }
     ]
   },
-  "skill_dispatch": {
+  "skill_registry": {
     "kicker": "SKILL REGISTRY",
     "color": "var(--security-stroke)",
     "summary": "dispatch 跟 7 個技能真的檢查權限並執行，但既有 6 個 stage 仍不經過這層——是 spec 刻意分離，不是漏接",
     "items": [
       {
-        "name": "create_skill_invocation(requested_capabilities=)",
+        "name": "SkillDefinition.permissions",
         "meta": "已修復",
         "status": "ok",
-        "desc": "真的核對 SkillDefinition.permissions，不是走過場。",
-        "evidence": "service/skill_registry.py"
+        "desc": "create_skill_invocation(requested_capabilities=) 真的核對 SkillDefinition.permissions，不是走過場。"
       },
       {
         "name": "SkillRegistration.status == ACTIVE",
@@ -15864,7 +15475,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         "evidence": "service/skill_registry.py:468-561"
       },
       {
-        "name": "7 個 run-* 子指令",
+        "name": "devos skill dispatch／7 個 run-*",
         "meta": "真實執行內容",
         "status": "ok",
         "desc": "task-brief/requirements/planning/qa/security/ux/memory 七種技能都有真的執行邏輯，不是只有 dispatch 檢查殼子。",
@@ -15878,17 +15489,16 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       }
     ]
   },
-  "eval_run": {
+  "eval_harness": {
     "kicker": "EVAL HARNESS",
-    "color": "var(--frontend-stroke)",
+    "color": "var(--backend-stroke)",
     "summary": "routing 類別有真的執行引擎，六階段主流程仍無——刻意不做，需人工裁定範圍",
     "items": [
       {
         "name": "EvalService",
         "meta": "彙總報表",
         "status": "info",
-        "desc": "純聚合既有 EvalRun 結果，跟「真的跑一次驗證」是兩個不同的東西——這是報表層，不是執行引擎。",
-        "evidence": "service/eval.py"
+        "desc": "純聚合既有 EvalRun 結果，跟「真的跑一次驗證」是兩個不同的東西——這是報表層，不是執行引擎。"
       },
       {
         "name": "devos eval run",
@@ -15905,17 +15515,16 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       }
     ]
   },
-  "dashboard_readonly": {
+  "dashboard": {
     "kicker": "DASHBOARD",
-    "color": "var(--security-stroke)",
+    "color": "var(--frontend-stroke)",
     "summary": "六個檢視確認純唯讀，grep 全檔找不到任何寫入呼叫",
     "items": [
       {
         "name": "Portfolio / Blueprint / Queue / Evidence / Decisions / Health",
         "meta": "六個檢視",
         "status": "ok",
-        "desc": "六個視圖各自對應不同治理面向，全部只讀資料組出畫面。",
-        "evidence": "dashboard/__init__.py"
+        "desc": "六個視圖各自對應不同治理面向，全部只讀資料組出畫面。"
       },
       {
         "name": "寫入呼叫掃描",
