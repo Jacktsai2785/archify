@@ -15125,6 +15125,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   .header h1 { font-size: clamp(24px, 1.6vw, 34px) !important; }
   .header .subtitle { font-size: clamp(13px, 0.85vw, 17px) !important; }
   .toolbar button { font-size: clamp(12px, 0.8vw, 16px) !important; }
+  /* archify's stock PATH/MAP/LENS + zoom nav (bottom-right, floating over the
+     diagram) ships at a fixed 0.56rem (~9px) regardless of container width --
+     it was always small by archify's own design, but it reads as flat-out
+     broken now that everything around it scales up with the widened
+     container. Bring it into the same vw-scaled family, just pegged smaller
+     since these are meant to stay compact icon-sized controls. */
+  .diagram-nav button { font-size: clamp(11px, 0.7vw, 14px) !important; }
 
   #child-drawer {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 2147483000;
