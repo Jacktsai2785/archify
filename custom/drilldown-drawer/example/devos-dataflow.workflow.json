@@ -1,0 +1,224 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "development-os Governance Pipeline",
+    "output": "devos-dataflow.html",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {
+      "id": "pipeline",
+      "label": "CLI 入口 → 分類 → 建管線 → 授權 → 沙盒執行"
+    },
+    {
+      "id": "verification",
+      "label": "Verification-basic → 人工裁定 → 終局/重試"
+    }
+  ],
+  "phases": [
+    {
+      "id": "intake",
+      "label": "分類與建管線",
+      "fromCol": 0,
+      "toCol": 2
+    },
+    {
+      "id": "build",
+      "label": "Development-basic 沙盒執行",
+      "fromCol": 3,
+      "toCol": 5,
+      "variant": "emphasis"
+    }
+  ],
+  "mainPath": [
+    "work_create",
+    "route",
+    "pipeline",
+    "authorize",
+    "builder",
+    "codehealth",
+    "verification",
+    "review",
+    "complete"
+  ],
+  "nodes": [
+    {
+      "id": "work_create",
+      "lane": "pipeline",
+      "col": 0,
+      "width": 90,
+      "type": "frontend",
+      "label": "work create",
+      "sublabel": "devos CLI"
+    },
+    {
+      "id": "route",
+      "lane": "pipeline",
+      "col": 1,
+      "width": 60,
+      "type": "backend",
+      "label": "Router",
+      "sublabel": "已修復"
+    },
+    {
+      "id": "pipeline",
+      "lane": "pipeline",
+      "col": 2,
+      "width": 90,
+      "type": "backend",
+      "label": "建管線",
+      "sublabel": "6 支建齊"
+    },
+    {
+      "id": "authorize",
+      "lane": "pipeline",
+      "col": 3,
+      "width": 90,
+      "type": "security",
+      "label": "authorize",
+      "sublabel": "已修復"
+    },
+    {
+      "id": "builder",
+      "lane": "pipeline",
+      "col": 3,
+      "width": 90,
+      "type": "cloud",
+      "label": "Builder",
+      "sublabel": "沙盒隔離",
+      "yOffset": 96
+    },
+    {
+      "id": "codehealth",
+      "lane": "pipeline",
+      "col": 4,
+      "width": 100,
+      "type": "backend",
+      "label": "CodeHealth",
+      "sublabel": "已修復",
+      "yOffset": 96
+    },
+    {
+      "id": "verification",
+      "lane": "verification",
+      "col": 4,
+      "width": 105,
+      "type": "backend",
+      "label": "Verification",
+      "sublabel": "雙重檢查",
+      "yOffset": 0
+    },
+    {
+      "id": "review",
+      "lane": "verification",
+      "col": 5,
+      "width": 100,
+      "type": "security",
+      "label": "work review",
+      "sublabel": "人工裁定",
+      "yOffset": 0
+    },
+    {
+      "id": "complete",
+      "lane": "verification",
+      "col": 5,
+      "width": 95,
+      "type": "frontend",
+      "label": "COMPLETED",
+      "sublabel": "WorkItem",
+      "yOffset": 96
+    },
+    {
+      "id": "retry",
+      "lane": "verification",
+      "col": 4,
+      "width": 95,
+      "type": "messagebus",
+      "label": "work retry",
+      "sublabel": "重試迴圈",
+      "yOffset": 96
+    }
+  ],
+  "edges": [
+    {
+      "from": "work_create",
+      "to": "route"
+    },
+    {
+      "from": "route",
+      "to": "pipeline"
+    },
+    {
+      "from": "pipeline",
+      "to": "authorize"
+    },
+    {
+      "from": "authorize",
+      "to": "builder",
+      "variant": "security"
+    },
+    {
+      "from": "builder",
+      "to": "codehealth"
+    },
+    {
+      "from": "codehealth",
+      "to": "verification",
+      "variant": "emphasis"
+    },
+    {
+      "from": "verification",
+      "to": "review"
+    },
+    {
+      "from": "review",
+      "to": "complete",
+      "label": "accept",
+      "variant": "emphasis"
+    },
+    {
+      "from": "review",
+      "to": "retry",
+      "label": "reject",
+      "variant": "security",
+      "role": "error"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "2026-09-10 覆核：8 項已修復仍成立",
+      "items": [
+        "Router／authorize／CodeHealth／Council 四項真的接線（附 file:line 證據）",
+        "全測試套件 1392 passed，0 failed"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "部分成立，刻意縮小範圍",
+      "items": [
+        "Skill Registry：dispatch 已檢查，既有 6 stage 仍繞過（spec 刻意分離）",
+        "Eval Harness：routing 類別有引擎，六階段主流程仍無（刻意不做）"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "拆檔重構覆核（service/__init__.py 10839→369 行）",
+      "items": [
+        "15+ 子模組代理鏈無斷裂，無 circular import",
+        "1392 passed／1 skipped／0 failed（約 17 分鐘）"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "sandbox_gauntlet",
+      "label": "三簽章 fail-closed 沙盒",
+      "lane": "pipeline",
+      "fromCol": 3,
+      "toCol": 3,
+      "variant": "security"
+    }
+  ]
+}

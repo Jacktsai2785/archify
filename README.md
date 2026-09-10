@@ -14,6 +14,13 @@
 
 Archify is a Node.js rendering and validation system for Cursor, Claude Code, Codex CLI, and OpenCode. Agents produce typed JSON IR; Archify deterministically compiles it into HTML/SVG.
 
+> **This is Jacktsai2785's fork of [tt-a1i/archify](https://github.com/tt-a1i/archify).**
+> It tracks upstream as-is and adds one personal post-processing add-on under
+> [`custom/drilldown-drawer/`](custom/drilldown-drawer/README.md): a click-to-expand
+> "internal flow" drawer for `workflow` diagrams, so a single node can show the
+> real function calls behind it instead of staying a black box. See that
+> README for usage, a worked example, and the gotchas it ran into.
+
 - **Open it and present** — five diagram types, four presets, dark/light themes, built-in brand marks, and finite motion
 - **Review architecture changes before merge** — compare two validated snapshots as Before / Delta / After, with exact added, removed, changed, moved, and rerouted facts
 - **Every interaction stays grounded** — search nodes, optionally open revision-verified source, trace upstream/downstream authored reach and exact routes, compare roles, and play guided stories without inventing topology

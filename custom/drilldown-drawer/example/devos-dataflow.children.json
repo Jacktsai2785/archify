@@ -1,0 +1,258 @@
+{
+  "work_create": {
+    "kicker": "ENTRY → CLI",
+    "color": "var(--frontend-stroke)",
+    "summary": "真正的起點是人工寫下的 Spec；devos work create 是把它轉成 WorkItem 的唯一機器入口",
+    "items": [
+      {
+        "name": "objective",
+        "meta": "目標・人工填寫",
+        "status": "info",
+        "desc": "一句話講這個 WorkItem 要達成什麼，沒有預設值，一定要人工寫。"
+      },
+      {
+        "name": "scope",
+        "meta": "範圍・人工填寫",
+        "status": "info",
+        "desc": "人工填寫這次允許改動的路徑範圍；之後 canonical_target_roots（最終合法目標路徑）跟授權範圍，都是從這裡長出來的，不是系統自己猜的。"
+      },
+      {
+        "name": "acceptance",
+        "meta": "驗收標準・人工填寫",
+        "status": "info",
+        "desc": "人工先寫好「怎樣才算做完」的驗收標準；最後 devos work review 人工審查時比對的就是這份標準，不是事後自動生成、隨便找個理由過關的。"
+      },
+      {
+        "name": "風險旗標",
+        "meta": "人工勾選",
+        "status": "info",
+        "desc": "人工勾選這次改動牽涉到哪些風險類型：是否碰機密資料、是否碰正式環境、是否不可逆、是否只能動特定檔案、是否要走 council 多方會審、是否單人執行。系統後續授權要多嚴格，就是看這裡勾了什麼。",
+        "evidence": "cli/__init__.py:302-338"
+      },
+      {
+        "name": "handle_work_create()",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "`devos work create` 這個 CLI 指令對應的入口函式，負責接住上面這些人工填寫的欄位，組成一個新的 WorkItem。",
+        "evidence": "cli/__init__.py:1327,1765"
+      }
+    ]
+  },
+  "route": {
+    "kicker": "STAGE",
+    "color": "var(--backend-stroke)",
+    "summary": "已修復：真的被呼叫，依人工旗標分類風險/協作深度",
+    "items": [
+      {
+        "name": "RoutingInput",
+        "meta": "資料結構",
+        "status": "info",
+        "desc": "把上一步人工填寫的 8 個特徵欄位（目標、範圍、風險旗標等）打包成一個資料結構，交給下面的 Router 判斷。"
+      },
+      {
+        "name": "Router.classify()",
+        "meta": "函式・程式碼",
+        "status": "ok",
+        "desc": "根據 RoutingInput 裡的欄位，依固定規則判斷這個 WorkItem 的風險等級跟需要幾層驗證；是一個不改變任何狀態的純函式，同樣輸入永遠得到同樣結果。",
+        "evidence": "router/__init__.py:59"
+      },
+      {
+        "name": "RoutingDecision",
+        "meta": "資料結構",
+        "status": "info",
+        "desc": "Router.classify() 的輸出結果，包含風險等級（risk_tier）、協作深度（collaboration_depth）、驗證深度（verification_depth）三個判斷值。"
+      },
+      {
+        "name": "service.route_work_item()",
+        "meta": "函式・程式碼",
+        "status": "ok",
+        "desc": "把上面的分類結果實際寫回 WorkItem 的函式。2026-09-10 覆核仍成立：確認它真的會被呼叫，risk_tier 欄位不會再永遠停留在空值。",
+        "evidence": "cli/__init__.py:1765 → service/work_item.py:1384"
+      }
+    ]
+  },
+  "pipeline": {
+    "kicker": "STAGE",
+    "color": "var(--frontend-stroke)",
+    "summary": "6 個 StageRun 一次建齊，QUEUED，早於任何授權",
+    "items": [
+      {
+        "name": "create_workflow_definition() ×2",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "建立兩份工作流程定義：development-basic（開發執行）跟 verification-basic（驗證），分別描述各自要跑哪些階段。"
+      },
+      {
+        "name": "create_workflow_run() ×2",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "依照上面兩份定義，各自建立一次真正要執行的 WorkflowRun；兩者是各自獨立的紀錄，靠同一個 work_item_id 串起來對應同一個 WorkItem。"
+      },
+      {
+        "name": "create_stage_run() ×6",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "把六個階段（從 Specifier 到 IndependentVerification）對應的 StageRun 紀錄一次全部建好，狀態是 QUEUED（排隊中），這時候還沒有任何一關被授權執行。",
+        "evidence": "gauntlet/__init__.py:507"
+      },
+      {
+        "name": "create_handoff_contract() ×N",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "建立階段跟階段交接時要用的合約紀錄；例如 CodeHealth 交給 DeterministicChecks 時，會存一份當下狀態的快照（snapshot），讓下一階段有東西可以核對。"
+      }
+    ]
+  },
+  "authorize": {
+    "kicker": "STAGE",
+    "color": "var(--security-stroke)",
+    "summary": "已修復：max_risk_tier 已改讀 WorkItem 實際 risk_assessment",
+    "items": [
+      {
+        "name": "issue_approval()",
+        "meta": "函式・程式碼",
+        "status": "ok",
+        "desc": "核發授權的函式；整個 repo 裡只有這一個地方會呼叫它，而且沒有 --force 或 bypass 這種可以跳過檢查的旗標。",
+        "evidence": "cli/__init__.py:2498-2534"
+      },
+      {
+        "name": "max_risk_tier",
+        "meta": "政策參數・已動態化",
+        "status": "ok",
+        "desc": "決定這次授權要用多嚴格標準的參數。2026-09-10 覆核仍成立：現在會真的去讀這個 WorkItem 先前 Router 判斷出來的風險等級（risk_assessment），只有在還沒經過 Router 分類時，才會退回預設的 MEDIUM（中風險）。",
+        "evidence": "cli/__init__.py:2940-2960"
+      }
+    ]
+  },
+  "builder": {
+    "kicker": "STAGE · SANDBOX",
+    "color": "var(--cloud-stroke)",
+    "summary": "全站唯一驗證為無懈可擊的三簽章沙盒",
+    "items": [
+      {
+        "name": "is_mutation_target_allowed()",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "檢查這次要改的目標是否同時符合三個條件：目標處於 MANAGED（受管理）狀態、已經註冊過合法的 sandbox root（沙盒根目錄）、而且 repo 目前是乾淨的（沒有未提交的髒狀態）。三個條件都符合才放行。"
+      },
+      {
+        "name": "_validate_approval_for_builder()",
+        "meta": "函式・程式碼",
+        "status": "ok",
+        "desc": "逐一核對這次執行帶的授權憑證：approval_id 是否存在、actor（執行者）是否相符、狀態是否為 ACTIVE（生效中）、有沒有過期。任何一項不符就直接擋下來。"
+      },
+      {
+        "name": "ExecutionGauntlet.execute()",
+        "meta": "函式・程式碼",
+        "status": "ok",
+        "desc": "把上面兩關再加上 lease（租約，確保沒有別的流程同時在改同一個目標）跟 lock（鎖，避免併發衝突）一起檢查；三個都通過了，才會真的去呼叫底層 adapter 執行改動。"
+      },
+      {
+        "name": "run_isolated_mutation()",
+        "meta": "函式・程式碼",
+        "status": "ok",
+        "desc": "實際執行改動的地方；用 git worktree --detach 把改動隔離在一份獨立副本裡，不直接碰真正的 repo。一旦偵測到 DirtyBaselineError（起始狀態不乾淨）或 ScopeEscapeError（改到授權範圍外的檔案），就會直接中止、不放行——這就是 fail-closed：出錯就關門，不會讓壞掉的狀態悄悄溜過去。",
+        "evidence": "executor/__init__.py:736-763"
+      }
+    ]
+  },
+  "codehealth": {
+    "kicker": "STAGE",
+    "color": "var(--backend-stroke)",
+    "summary": "2026-09-10 覆核仍成立：ratchet baseline 與 mutation 還原都已修復",
+    "items": [
+      {
+        "name": "changed_scope_coverage_and_complexity_ratchet()",
+        "meta": "函式・程式碼",
+        "status": "ok",
+        "desc": "檢查這次改動有沒有讓程式碼覆蓋率或複雜度變差。第一次執行時會把當下數值凍結成 baseline（基準線），之後每次都拿新結果跟這條基準線比較，不會一直用寬鬆的預設值放水通過。",
+        "evidence": "service/quality_policy.py:376-430"
+      },
+      {
+        "name": "budgeted_mutation_testing()",
+        "meta": "函式・程式碼",
+        "status": "ok",
+        "desc": "用突變測試（mutation testing）驗證測試品質，且有時間／資源預算限制。用 try/finally 包起來，保證不管中途發生什麼型別的例外，都會把真正的 repo_path 還原，不會留下被改壞的狀態。",
+        "evidence": "checks/__init__.py:694-701"
+      }
+    ]
+  },
+  "verification": {
+    "kicker": "STAGE",
+    "color": "var(--frontend-stroke)",
+    "summary": "獨立第二個 WorkflowRun 的雙重檢查",
+    "items": [
+      {
+        "name": "DeterministicChecks",
+        "meta": "子階段",
+        "status": "info",
+        "desc": "第一個子階段，執行 execute_deterministic_checks_stage()，做的是機械化、規則式的檢查，例如 lint、型別檢查這類有固定答案的檢查。"
+      },
+      {
+        "name": "IndependentVerification",
+        "meta": "子階段",
+        "status": "info",
+        "desc": "第二個子階段，執行 execute_independent_verification_stage()，由獨立於原本執行流程的另一套邏輯，重新覆核一次結果。"
+      },
+      {
+        "name": "HandoffContract",
+        "meta": "邊界檢查",
+        "status": "partial",
+        "desc": "上一站交接下來的合約紀錄，objective/scope/acceptance 這些當初人工填寫的標準都有完整寫入快照裡；但這一站目前還沒有把內容讀回來、跟自己驗證的結果做一致性比對，所以理論上有「孤兒資料」風險——寫了，但沒人真的檢查它有沒有被遵守。"
+      }
+    ]
+  },
+  "review": {
+    "kicker": "STAGE",
+    "color": "var(--security-stroke)",
+    "summary": "devos work review 是唯一終局裁定入口",
+    "items": [
+      {
+        "name": "handle_work_review()",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "`devos work review` 指令對應的入口函式，會呼叫 record_manual_acceptance_verdict()，讓人工把這次的產出跟最初 work_create 時填的 acceptance 標準逐項比對，做出最終裁定。"
+      },
+      {
+        "name": "accept",
+        "meta": "分支・人工裁定",
+        "status": "ok",
+        "desc": "人工裁定通過：WorkItem 狀態改成 COMPLETED，整個流程到此正式結束。",
+        "parallel": true
+      },
+      {
+        "name": "reject",
+        "meta": "分支・人工裁定",
+        "status": "partial",
+        "desc": "人工裁定不通過：不會自動修復，而是產生一筆 RemediationDebt（整改債務）並標記為 WAITING（等待處理）。這不是被系統遺忘的孤兒狀態，但也不會有人自動幫你修好。",
+        "parallel": true
+      }
+    ]
+  },
+  "complete": {
+    "kicker": "OUTCOME",
+    "color": "var(--frontend-stroke)",
+    "summary": "終局狀態，accept 之後流程結束",
+    "items": [
+      {
+        "name": "WorkItem.status = COMPLETED",
+        "meta": "終局狀態",
+        "status": "ok",
+        "desc": "WorkItem 唯一的正常終局狀態，代表整個治理流程從建立到人工驗收都已經走完。"
+      }
+    ]
+  },
+  "retry": {
+    "kicker": "REMEDIATION",
+    "color": "var(--cloud-stroke)",
+    "summary": "reject 之後唯一前進路徑",
+    "items": [
+      {
+        "name": "retry_work_item()",
+        "meta": "函式・程式碼",
+        "status": "info",
+        "desc": "reject 之後唯一能往前走的路徑：不是修補舊的執行紀錄，而是重新建立一整組全新的 StageRun，退回「建管線」那一步，整個流程重新跑一輪。"
+      }
+    ]
+  }
+}
